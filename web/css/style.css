@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+}
+
+h1, h3 {
+    color: white;
+    text-align: center;
+    font-family: 'Varela Round', sans-serif;
+}
+
+body {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: auto auto;
+    background-color: lightblue;
+    background-image: url("../img/fondo.jpg");
+    background-attachment:fixed;
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+
+.formularioLogueo, .formularioRegistro {
+    display: flex;
+    flex-direction:column;
+    width: 75%;
+    height: auto;
+    margin: auto auto;
+    gap: 1vh;
+    padding: 10vh 20vh 20vh 20vh;
+    border: solid 1px black;
+    background-color: rgba(0,0,0,.7);
+}
+
+.campoTexto {
+    width: 100%;    
+    padding: 1vh;
+    outline: none;
+    border: solid 2px black;
+}
+
+.botones {
+    display: flex;
+    gap: 1vw;
+    width: 100%;
+    justify-content: center;
+}
+
+.boton{
+    padding: 1vh;
+    width: 50%;
+    min-width: 25%;
+}
+
+.errores {
+    color: black;
+    padding: 2vh;
+    font-size: 20px;
+}
+
+.resultado {
+    width: 50vw;
+    padding: 2vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: auto auto;
+    height: 50vh;
+    background-color: rgba(0 ,0 ,0 , .8);
+    color: white;
+    font-size: 20px;
+}
+
+.resultado a {
+    color: white;
+    display: inline-block;
+    height: 10px;
+}
+
+.resultado p {
+    margin: auto auto;
+}
+
+.resultado h3 {
+    margin: auto auto;
+}
+
+.centrarCosas {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.campos {
+    margin: auto auto;
+}
