@@ -3,6 +3,34 @@
     <servlet>
         <servlet-name>controlador</servlet-name>
         <servlet-class>es.guillermo.controlador.controlador</servlet-class>
+        <init-param>
+            <description>
+                Dirección de la base de datos
+            </description>
+            <param-name>direccionBD</param-name>
+            <param-value>localhost</param-value>
+        </init-param>
+        <init-param>
+            <description>
+                Nombre de la BD
+            </description>
+            <param-name>nombreBD</param-name>
+            <param-value>agr_precision</param-value>
+        </init-param>
+        <init-param>
+            <description>
+                Nombre del usuario de la BD
+            </description>
+            <param-name>nombreUsu</param-name>
+            <param-value>root</param-value>
+        </init-param>
+        <init-param>
+            <description>
+                Contraseña de la BD
+            </description>
+            <param-name>pwdUsu</param-name>
+            <param-value></param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>controlador</servlet-name>

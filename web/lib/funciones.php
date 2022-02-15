@@ -1,21 +1,5 @@
 <?php
 
-function conectar()
-{
-    $server = "localhost";
-    $user = "root";
-    $pass = "";
-    $bd = "agr_precision";
-    $conexion = mysqli_connect($server, $user, $pass, $bd) or die("Ha sucedido un error inexperado en la conexion de la base de datos");
-    return $conexion;
-}
-
-function cerrarConexion($conexion)
-{
-    $close = mysqli_close($conexion) or die("Ha sucedido un error inexperado en la desconexion de la base de datos");
-    return $close;
-}
-
 function sha256($pwd)
 {
     return hash('SHA256', $pwd);

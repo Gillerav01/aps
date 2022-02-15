@@ -7,6 +7,15 @@ public class Rol {
     public Rol() {
     }
 
+    public Rol(int idRol, String nombreRol) {
+        this.idRol = idRol;
+        this.nombreRol = nombreRol;
+    }
+
+    public Rol(String nombreRol) {
+        this.nombreRol = nombreRol;
+    }
+    
     public int getIdRol() {
         return idRol;
     }
@@ -22,5 +31,7 @@ public class Rol {
     public void setNombreRol(String nombreRol) {
         this.nombreRol = nombreRol;
     }
+    
+    
     
 }

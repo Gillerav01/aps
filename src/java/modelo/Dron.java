@@ -8,6 +8,12 @@ public class Dron {
 
     public Dron() {
     }
+
+    public Dron(int idPiloto, String modeloDron, String marcaDron) {
+        this.idPiloto = idPiloto;
+        this.modeloDron = modeloDron;
+        this.marcaDron = marcaDron;
+    }
     
     public Dron(int id, int idPiloto, String modeloDron, String marcaDron) {
         this.id = id;

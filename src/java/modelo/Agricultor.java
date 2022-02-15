@@ -11,6 +11,14 @@ public class Agricultor {
     public Agricultor() {
     }
 
+    public Agricultor(String nombre, String apellido, String dni, String password, String email) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.password = password;
+        this.email = email;
+    }
+    
     public Agricultor(int id, String nombre, String apellido, String dni, String password, String email) {
         this.id = id;
         this.nombre = nombre;

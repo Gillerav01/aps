@@ -13,6 +13,16 @@ public class Parcela {
     public Parcela() {
     }
 
+    public Parcela(String nomParcela, int area, int idAgricultor, String direccionArchivo, int provincia, int municipio, String puntos) {
+        this.nomParcela = nomParcela;
+        this.area = area;
+        this.idAgricultor = idAgricultor;
+        this.direccionArchivo = direccionArchivo;
+        this.provincia = provincia;
+        this.municipio = municipio;
+        this.puntos = puntos;
+    }
+    
     public Parcela(int id, String nomParcela, int area, int idAgricultor, String direccionArchivo, int provincia, int municipio, String puntos) {
         this.id = id;
         this.nomParcela = nomParcela;

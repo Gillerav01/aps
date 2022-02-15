@@ -15,6 +15,15 @@ public class Trabajo {
     public Trabajo() {
     }
 
+    public Trabajo(int idParcela, int idPiloto, int idAgricultor, int idDron, Date fechaRegistro, Date fechaRealizacion) {
+        this.idParcela = idParcela;
+        this.idPiloto = idPiloto;
+        this.idAgricultor = idAgricultor;
+        this.idDron = idDron;
+        this.fechaRegistro = fechaRegistro;
+        this.fechaRealizacion = fechaRealizacion;
+    }
+    
     public Trabajo(int idTrabajo, int idParcela, int idPiloto, int idAgricultor, int idDron, Date fechaRegistro, Date fechaRealizacion) {
         this.idTrabajo = idTrabajo;
         this.idParcela = idParcela;
