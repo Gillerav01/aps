@@ -40,7 +40,14 @@ public class AgricultorDAO {
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("INSERT INTO `agricultores` (`id`, `nombre`, `apellido`, `dni`, `password`, `email`) VALUES (NULL, '" + agricultor.getNombre() + "', '" + agricultor.getApellido() + "', '" + agricultor.getDni() + "', '" + agricultor.getPassword() + "', '" + agricultor.getEmail() + "');");
+            st.executeUpdate("INSERT INTO `agricultores` (`id`, `nombre`, `apellido`, `dni`, `password`, `email`) VALUES (NULL, '" 
+                    + agricultor.getNombre() 
+                    + "', '" 
+                    + agricultor.getApellido() 
+                    + "', '" + agricultor.getDni() 
+                    + "', '" + agricultor.getPassword() 
+                    + "', '" + agricultor.getEmail() 
+                    + "');");
             return true;
         }
     }
@@ -51,20 +58,30 @@ public class AgricultorDAO {
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("DELETE FROM `agricultores` WHERE `agricultores`.`id` = " + agricultor.getId() + ";");
+            st.executeUpdate("DELETE FROM `agricultores` WHERE `agricultores`.`id` = " 
+                    + agricultor.getId() + ";");
             return true;
         }
     }
-    
-        public boolean modificarAgricultor(Agricultor agricultor, Agricultor agricultorModificado) throws SQLException {
+
+    public boolean modificarAgricultor(Agricultor agricultor, Agricultor agricultorModificado) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("DELETE FROM `agricultores` WHERE `agricultores`.`id` = " + agricultor.getId() + ";");
+            st.executeUpdate("UPDATE `agricultores` SET `nombre` = '" 
+                    + agricultorModificado.getNombre() 
+                    + "', `apellido` = '" 
+                    + agricultorModificado.getApellido() 
+                    + "', `dni` = '" + agricultorModificado.getDni()
+                    + "', `password` = '" 
+                    + agricultorModificado.getPassword() 
+                    + "', `email` = '" + agricultorModificado.getEmail() 
+                    + "' WHERE `agricultores`.`id` = " 
+                    + agricultor.getId() 
+                    + ";");
             return true;
         }
     }
-    
 }
