@@ -43,6 +43,7 @@ public class controlador extends HttpServlet {
         radao.setConn(conn);
         rdao.setConn(conn);
         tdao.setConn(conn);
+        
 
         System.out.println(tdao.getConn().toString());
     }

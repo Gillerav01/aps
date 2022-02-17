@@ -1,12 +1,18 @@
 package DB;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import modelo.Agricultor;
+import modelo.Parcela;
+import modelo.Rol;
 import modelo.RolAgricultor;
 
 public class RolAgricultorDAO {
+
     private RolAgricultor ra;
     private Connection conn;
-    
+
     public RolAgricultorDAO() {
     }
 
@@ -30,6 +36,27 @@ public class RolAgricultorDAO {
     public void setConn(Connection conn) {
         this.conn = conn;
     }
-    
-    
+
+    public boolean otogarRol(Rol rol, Agricultor agricultor) throws SQLException {
+        if (this.conn == null) {
+            System.out.println("No existe una conexión con la base de datos.");
+            return false;
+        } else {
+            Statement st = this.conn.createStatement();
+            st.executeUpdate("INSERT INTO `rolesagricultores` (`idAgricultor`, `idRol`) VALUES ('" + agricultor.getId() + "', '" + rol.getIdRol() + "');");
+            return true;
+        }
+    }
+
+    public boolean quitarRol(Rol rol, Agricultor agricultor) throws SQLException {
+        if (this.conn == null) {
+            System.out.println("No existe una conexión con la base de datos.");
+            return false;
+        } else {
+            Statement st = this.conn.createStatement();
+            st.executeUpdate("DELETE FROM `rolesagricultores` WHERE `rolesagricultores`.`idAgricultor` = " + agricultor.getId() + " AND `rolesagricultores`.`idRol` = " + rol.getIdRol() + "");
+            return true;
+        }
+    }
+
 }

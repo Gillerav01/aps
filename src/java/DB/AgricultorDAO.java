@@ -1,9 +1,12 @@
 package DB;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import modelo.Agricultor;
+import modelo.Rol;
 
 public class AgricultorDAO {
 
@@ -83,5 +86,15 @@ public class AgricultorDAO {
                     + ";");
             return true;
         }
+    }
+    
+    public Agricultor recuperarDatos(Agricultor agricultor) throws SQLException{
+        Statement stmt = this.conn.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT * FROM agricultores WHERE id = " + agricultor.getId());
+        Agricultor agricultorRecuperado =  null;
+        while (result.next()) {
+            agricultorRecuperado = new Agricultor(result.getInt("id"), result.getString("nombre"), result.getString("apellido"), result.getString("dni"), result.getString("email"), result.getString("password"));
+        }
+        return agricultorRecuperado;
     }
 }
