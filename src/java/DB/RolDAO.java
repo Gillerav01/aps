@@ -90,6 +90,43 @@ public class RolDAO {
         }
         return roles;
     }
+
+    public ArrayList<Rol> verRolesNoPoseidos(Agricultor agricultor) throws SQLException {
+        ArrayList<Rol> roles = new ArrayList();
+        ArrayList<Rol> verRolesNoPoseidos = new ArrayList();
+        ArrayList<Rol> rolesUsuario = verRolesUsuario(agricultor);
+        Statement stmt = this.conn.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT nombreRol FROM roles");
+        while (result.next()) {
+            roles.add(new Rol(result.getInt("idRol"), result.getString("nombreRol")));
+        }
+        for (Rol rol : roles) {
+            for (Rol rolesU : rolesUsuario) {
+                if (rol.getIdRol() != rolesU.getIdRol()) {
+                    verRolesNoPoseidos.add(rol);
+                }
+            }
+        }
+        return verRolesNoPoseidos;
+    }
     
-    
+        public ArrayList<Rol> verRolesPoseidos(Agricultor agricultor) throws SQLException {
+        ArrayList<Rol> roles = new ArrayList();
+        ArrayList<Rol> verRolesPoseidos = new ArrayList();
+        ArrayList<Rol> rolesUsuario = verRolesUsuario(agricultor);
+        Statement stmt = this.conn.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT nombreRol FROM roles");
+        while (result.next()) {
+            roles.add(new Rol(result.getInt("idRol"), result.getString("nombreRol")));
+        }
+        for (Rol rol : roles) {
+            for (Rol rolesU : rolesUsuario) {
+                if (rol.getIdRol() == rolesU.getIdRol()) {
+                    verRolesPoseidos.add(rol);
+                }
+            }
+        }
+        return verRolesPoseidos;
+    }
+
 }
