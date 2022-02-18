@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Agricultor;
 import modelo.Dron;
-import modelo.Rol;
+import modelo.Parcela;
 import modelo.Trabajo;
 
 public class TrabajoDAO {
@@ -38,88 +38,77 @@ public class TrabajoDAO {
     public void setConn(Connection conn) {
         this.conn = conn;
     }
-
-    public boolean crearTrabajo(Rol rol) throws SQLException {
+    
+    public boolean crearTrabajo(Parcela parcela, Agricultor piloto, Trabajo trabajo) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("INSERT INTO `roles` (`idRol`, `nombreRol`) VALUES (NULL, '" + rol.getNombreRol() + "');");
+            st.executeUpdate("INSERT INTO `trabajos` (`idTrabajo`, `idParcela`, `idPiloto`, `idAgricultor`, `idDron`, `tipoTarea`, `fechaRegistro`, `fechaRealizacion`) VALUES (NULL, '" + parcela.getId() + "', '$idPiloto', '" + piloto.getId() + "', NULL, '" + trabajo.getTipoTrabajo() + "', current_timestamp(), NULL);");
             return true;
         }
     }
 
-    public boolean borrarTrabajo(Rol rol) throws SQLException {
+    public boolean borrarTrabajo(Trabajo trabajo) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("DELETE FROM `roles` WHERE `roles`.`idRol` = " + rol.getIdRol() + "");
+            st.executeUpdate("DELETE FROM `trabajos` WHERE idTrabajo = " + trabajo.getIdTrabajo() +"");
             return true;
         }
     }
-
-    public boolean modificarTrabajo(Rol rol, Rol rolModificado) throws SQLException {
-        if (this.conn == null) {
-            System.out.println("No existe una conexión con la base de datos.");
-            return false;
-        } else {
-            Statement st = this.conn.createStatement();
-            st.executeUpdate("UPDATE `roles` SET `nombreRol` = '" + rolModificado.getNombreRol() + "' WHERE `roles`.`idRol` = " + rol.getIdRol() + ";");
-            return true;
-        }
-    }
-
-    public ArrayList<Rol> verTrabajos() throws SQLException {
-        ArrayList<Rol> roles = new ArrayList();
+    
+    public ArrayList<Trabajo> verTrabajos() throws SQLException {
+        ArrayList<Trabajo> trabajos = new ArrayList();
         Statement stmt = this.conn.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM roles");
+        ResultSet result = stmt.executeQuery("SELECT * FROM trabajos");
         while (result.next()) {
-            roles.add(new Rol(result.getInt("idRol"), result.getString("nombreRol")));
+            trabajos.add(new Trabajo(result.getInt("idTrabajo"), result.getInt("idParcela"), result.getInt("idPiloto"), result.getInt("idAgricultor"), result.getInt("idDron"), result.getString("tipoTarea"), result.getDate("fechaRegistro"), result.getDate("fechaRealizacion")));
         }
-        return roles;
+        return trabajos;
     }
 
-    public ArrayList<Rol> verTrabajosAgricultorPendiente(Agricultor agricultor) throws SQLException {
-        ArrayList<Rol> roles = new ArrayList();
+    public ArrayList<Trabajo> verTrabajosAgricultorPendiente(Agricultor agricultor) throws SQLException {
+        ArrayList<Trabajo> trabajos = new ArrayList();
         Statement stmt = this.conn.createStatement();
         ResultSet result = stmt.executeQuery("SELECT * FROM trabajos WHERE idAgricultor = " + agricultor.getId() + " AND fechaRealizacion IS null");
         while (result.next()) {
-            roles.add(new Rol(result.getInt("idRol"), result.getString("nombreRol")));
+            trabajos.add(new Trabajo(result.getInt("idTrabajo"), result.getInt("idParcela"), result.getInt("idPiloto"), result.getInt("idAgricultor"), result.getInt("idDron"), result.getString("tipoTarea"), result.getDate("fechaRegistro"), result.getDate("fechaRealizacion")));
         }
-        return roles;
+        return trabajos;
     }
 
-    public ArrayList<Rol> verTrabajosAgricultorFinalizado(Agricultor agricultor) throws SQLException {
-        ArrayList<Rol> roles = new ArrayList();
+    public ArrayList<Trabajo> verTrabajosAgricultorFinalizado(Agricultor agricultor) throws SQLException {
+        ArrayList<Trabajo> trabajos = new ArrayList();
         Statement stmt = this.conn.createStatement();
         ResultSet result = stmt.executeQuery("SELECT * FROM trabajos WHERE idAgricultor = " + agricultor.getId() + " AND fechaRealizacion IS NOT null");
         while (result.next()) {
-            roles.add(new Rol(result.getInt("idRol"), result.getString("nombreRol")));
+            trabajos.add(new Trabajo(result.getInt("idTrabajo"), result.getInt("idParcela"), result.getInt("idPiloto"), result.getInt("idAgricultor"), result.getInt("idDron"), result.getString("tipoTarea"), result.getDate("fechaRegistro"), result.getDate("fechaRealizacion")));
         }
-        return roles;
+        return trabajos;
     }
 
-    public ArrayList<Rol> verTrabajosPilotoPendientes(Agricultor agricultor) throws SQLException {
-        ArrayList<Rol> roles = new ArrayList();
+    public ArrayList<Trabajo> verTrabajosPilotoPendientes(Agricultor agricultor) throws SQLException {
+        ArrayList<Trabajo> trabajos = new ArrayList();
         Statement stmt = this.conn.createStatement();
         ResultSet result = stmt.executeQuery("SELECT * FROM trabajos WHERE idPiloto = " + agricultor.getId() + " AND fechaRealizacion IS null");
         while (result.next()) {
-            roles.add(new Rol(result.getInt("idRol"), result.getString("nombreRol")));
+            trabajos.add(new Trabajo(result.getInt("idTrabajo"), result.getInt("idParcela"), result.getInt("idPiloto"), result.getInt("idAgricultor"), result.getInt("idDron"), result.getString("tipoTarea"), result.getDate("fechaRegistro"), result.getDate("fechaRealizacion")));
         }
-        return roles;
+        return trabajos;
     }
 
-    public ArrayList<Rol> verTrabajosPilotoFinalizado(Agricultor agricultor) throws SQLException {
-        ArrayList<Rol> roles = new ArrayList();
+    public ArrayList<Trabajo> verTrabajosPilotoFinalizado(Agricultor agricultor) throws SQLException {
+        ArrayList<Trabajo> trabajos = new ArrayList();
         Statement stmt = this.conn.createStatement();
         ResultSet result = stmt.executeQuery("SELECT * FROM trabajos WHERE idPiloto = " + agricultor.getId() + " AND fechaRealizacion IS NOT null");
         while (result.next()) {
-            roles.add(new Rol(result.getInt("idRol"), result.getString("nombreRol")));
+            trabajos.add(new Trabajo(result.getInt("idTrabajo"), result.getInt("idParcela"), result.getInt("idPiloto"), result.getInt("idAgricultor"), result.getInt("idDron"), result.getString("tipoTarea"), result.getDate("fechaRegistro"), result.getDate("fechaRealizacion")));
         }
-        return roles;
+        return trabajos;
     }
 
     public boolean realizarTrabajo (Trabajo trabajo, Dron dron) throws SQLException{
