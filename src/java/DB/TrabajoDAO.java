@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Agricultor;
+import modelo.Dron;
 import modelo.Rol;
 import modelo.Trabajo;
 
@@ -121,4 +122,14 @@ public class TrabajoDAO {
         return roles;
     }
 
+    public boolean realizarTrabajo (Trabajo trabajo, Dron dron) throws SQLException{
+         if (this.conn == null) {
+            System.out.println("No existe una conexión con la base de datos.");
+            return false;
+        } else {
+            Statement st = this.conn.createStatement();
+            st.executeUpdate("UPDATE `trabajos` SET `idDron` = '" + dron.getId() + "', `fechaRealizacion` = current_timestamp() WHERE `trabajos`.`idTrabajo` = " + trabajo.getIdTrabajo());
+            return true;
+        }
+    }
 }
