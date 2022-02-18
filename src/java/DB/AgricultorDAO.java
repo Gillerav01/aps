@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import lib.utilidades;
 import modelo.Agricultor;
 import modelo.Rol;
 
@@ -87,10 +88,20 @@ public class AgricultorDAO {
             return true;
         }
     }
-
-    public Agricultor recuperarDatos(Agricultor agricultor) throws SQLException {
+    
+    public ArrayList<Agricultor> recuperarUsuarios () throws SQLException{
+        ArrayList<Agricultor> usuarios = new ArrayList();
         Statement stmt = this.conn.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM agricultores WHERE id = " + agricultor.getId());
+        ResultSet result = stmt.executeQuery("SELECT * FROM agricultores");
+        while (result.next()) {
+            usuarios.add(new Agricultor(result.getInt("id"), result.getString("nombre"), result.getString("apellido"), result.getString("dni"), result.getString("email")));
+        }
+        return usuarios;
+    }
+
+    public Agricultor recuperarDatos(int id) throws SQLException {
+        Statement stmt = this.conn.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT * FROM agricultores WHERE id = " + id);
         Agricultor agricultorRecuperado = null;
         while (result.next()) {
             agricultorRecuperado = new Agricultor(result.getInt("id"), result.getString("nombre"), result.getString("apellido"), result.getString("dni"), result.getString("email"), result.getString("password"));
@@ -107,4 +118,14 @@ public class AgricultorDAO {
         }
         return pilotos;
     }
+    
+    public Agricultor verificar(String login, String pwd) throws SQLException{
+        Statement stmt = this.conn.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT id, password FROM agricultores WHERE dni = " + login + " OR email = " + login + ";");
+        if (result.getString("password").equals(utilidades.convertirSHA256(pwd))){
+            return new Agricultor(result.getInt("id"), result.getString("nombre"), result.getString("apellido"), result.getString("dni"), result.getString("email"), result.getString("password"));
+        }
+        return null;
+    }
+    
 }
