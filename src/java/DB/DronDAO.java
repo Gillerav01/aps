@@ -34,7 +34,13 @@ public class DronDAO {
     public void setConn(Connection conn) {
         this.conn = conn;
     }
-
+    /***
+     * Crea un dron y se lo asigna al agricultor que lo ha creado
+     * @param dron
+     * @param agricultor
+     * @return
+     * @throws SQLException 
+     */
     public boolean crearDron(Dron dron, Agricultor agricultor) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
@@ -52,6 +58,13 @@ public class DronDAO {
         }
     }
 
+    /***
+     * Borra un dron
+     * @param dron
+     * @return
+     * @throws SQLException 
+     */
+    
     public boolean borrarDron(Dron dron) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
@@ -64,6 +77,14 @@ public class DronDAO {
         }
     }
 
+    /***
+     * Modifica un dron
+     * @param dron
+     * @param dronModificado
+     * @return
+     * @throws SQLException 
+     */
+    
     public boolean modificarDron(Dron dron, Dron dronModificado) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");

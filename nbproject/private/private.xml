@@ -8,5 +8,13 @@
             <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/lib/funciones.php</file>
             <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/src/java/DB/RolDAO.java</file>
         </group>
+        <group name="Apu ntes">
+            <file>file:/C:/xampp/htdocs/JardineriaPrecisionSERVLET/src/java/DB/DronDAO.java</file>
+            <file>file:/C:/xampp/htdocs/JardineriaPrecisionSERVLET/src/java/DB/AgricultorDAO.java</file>
+            <file>file:/C:/xampp/htdocs/JardineriaPrecisionSERVLET/src/java/DB/RolAgricultorDAO.java</file>
+            <file>file:/C:/xampp/htdocs/JardineriaPrecisionSERVLET/src/java/DB/ParcelaDAO.java</file>
+            <file>file:/C:/xampp/htdocs/JardineriaPrecisionSERVLET/src/java/DB/RolDAO.java</file>
+            <file>file:/C:/xampp/htdocs/JardineriaPrecisionSERVLET/src/java/DB/TrabajoDAO.java</file>
+        </group>
     </open-files>
 </project-private>

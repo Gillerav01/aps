@@ -38,6 +38,13 @@ public class RolDAO {
         this.conn = conn;
     }
 
+    /***
+     * Crea un nuevo rol
+     * @param rol
+     * @return
+     * @throws SQLException 
+     */
+    
     public boolean crearRol(Rol rol) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
@@ -49,6 +56,13 @@ public class RolDAO {
         }
     }
 
+    /***
+     * Borra un rol
+     * @param rol
+     * @return
+     * @throws SQLException 
+     */
+    
     public boolean borrarRol(Rol rol) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
@@ -60,6 +74,14 @@ public class RolDAO {
         }
     }
 
+    /***
+     * Modifica un rol seleccionado
+     * @param rol
+     * @param rolModificado
+     * @return
+     * @throws SQLException 
+     */
+    
     public boolean modificarRol(Rol rol, Rol rolModificado) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
@@ -71,6 +93,12 @@ public class RolDAO {
         }
     }
 
+    /***
+     * Te permite ver todos los roles en la BBDD
+     * @return
+     * @throws SQLException 
+     */
+    
     public ArrayList<Rol> verRoles() throws SQLException {
         ArrayList<Rol> roles = new ArrayList();
         Statement stmt = this.conn.createStatement();
@@ -81,6 +109,13 @@ public class RolDAO {
         return roles;
     }
 
+    /***
+     * Te permite ver los roles de un usuario
+     * @param agricultor
+     * @return
+     * @throws SQLException 
+     */
+    
     public ArrayList<Rol> verRolesUsuario(Agricultor agricultor) throws SQLException {
         ArrayList<Rol> roles = new ArrayList();
         Statement stmt = this.conn.createStatement();
@@ -91,6 +126,13 @@ public class RolDAO {
         return roles;
     }
 
+    /***
+     * Te permite ver los roles que un usuario NO tiene
+     * @param agricultor
+     * @return
+     * @throws SQLException 
+     */
+    
     public ArrayList<Rol> verRolesNoPoseidos(Agricultor agricultor) throws SQLException {
         ArrayList<Rol> roles = new ArrayList();
         ArrayList<Rol> verRolesNoPoseidos = new ArrayList();
@@ -109,6 +151,13 @@ public class RolDAO {
         }
         return verRolesNoPoseidos;
     }
+    
+    /***
+     * Te permite ver los roles que SI tiene un usuario
+     * @param agricultor
+     * @return
+     * @throws SQLException 
+     */
     
         public ArrayList<Rol> verRolesPoseidos(Agricultor agricultor) throws SQLException {
         ArrayList<Rol> roles = new ArrayList();

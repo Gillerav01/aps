@@ -36,7 +36,13 @@ public class RolAgricultorDAO {
     public void setConn(Connection conn) {
         this.conn = conn;
     }
-
+    /***
+     * Le otogar un rol al agricultor seleccionado
+     * @param rol
+     * @param agricultor
+     * @return
+     * @throws SQLException 
+     */
     public boolean otogarRol(Rol rol, Agricultor agricultor) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
@@ -48,6 +54,14 @@ public class RolAgricultorDAO {
         }
     }
 
+    /***
+     * Le quita un rol al agricultor seleccionado
+     * @param rol
+     * @param agricultor
+     * @return
+     * @throws SQLException 
+     */
+    
     public boolean quitarRol(Rol rol, Agricultor agricultor) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");

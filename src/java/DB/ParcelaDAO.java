@@ -35,6 +35,14 @@ public class ParcelaDAO {
         this.conn = conn;
     }
     
+    /***
+     * Crea una parcela nueva asignandosela al agricultor logueado
+     * @param parcela
+     * @param agricultor
+     * @return
+     * @throws SQLException 
+     */
+    
     public boolean crearParcela(Parcela parcela, Agricultor agricultor) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
@@ -46,6 +54,13 @@ public class ParcelaDAO {
         }
     }
 
+    /***
+     * Borra una parcela
+     * @param parcela
+     * @return
+     * @throws SQLException 
+     */
+    
     public boolean borrarParcela(Parcela parcela) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
@@ -56,7 +71,13 @@ public class ParcelaDAO {
             return true;
         }
     }
-
+    /***
+     * Modifica una parcela
+     * @param parcela
+     * @param parcelaModificada
+     * @return
+     * @throws SQLException 
+     */
     public boolean modificarParcela(Parcela parcela, Parcela parcelaModificada) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
