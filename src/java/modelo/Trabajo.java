@@ -8,7 +8,7 @@ public class Trabajo {
     private int idPiloto;
     private int idAgricultor;
     private int idDron;
-    private enum tipoTrabajo {Abonado, Fumigacion}; 
+    private String tipoTrabajo; 
     private Date fechaRegistro;
     private Date fechaRealizacion;
 
@@ -20,6 +20,27 @@ public class Trabajo {
         this.idPiloto = idPiloto;
         this.idAgricultor = idAgricultor;
         this.idDron = idDron;
+        this.fechaRegistro = fechaRegistro;
+        this.fechaRealizacion = fechaRealizacion;
+    }
+
+    public Trabajo(int idParcela, int idPiloto, int idAgricultor, int idDron, String tipoTrabajo, Date fechaRegistro, Date fechaRealizacion) {
+        this.idParcela = idParcela;
+        this.idPiloto = idPiloto;
+        this.idAgricultor = idAgricultor;
+        this.idDron = idDron;
+        this.tipoTrabajo = tipoTrabajo;
+        this.fechaRegistro = fechaRegistro;
+        this.fechaRealizacion = fechaRealizacion;
+    }
+    
+    public Trabajo(int idTrabajo, int idParcela, int idPiloto, int idAgricultor, int idDron, String tipoTrabajo, Date fechaRegistro, Date fechaRealizacion) {
+        this.idTrabajo = idTrabajo;
+        this.idParcela = idParcela;
+        this.idPiloto = idPiloto;
+        this.idAgricultor = idAgricultor;
+        this.idDron = idDron;
+        this.tipoTrabajo = tipoTrabajo;
         this.fechaRegistro = fechaRegistro;
         this.fechaRealizacion = fechaRealizacion;
     }
@@ -65,7 +86,7 @@ public class Trabajo {
     public void setIdAgricultor(int idAgricultor) {
         this.idAgricultor = idAgricultor;
     }
-
+    
     public int getIdDron() {
         return idDron;
     }
@@ -89,4 +110,13 @@ public class Trabajo {
     public void setFechaRealizacion(Date fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
     }
+
+    public String getTipoTrabajo() {
+        return tipoTrabajo;
+    }
+
+    public void setTipoTrabajo(String tipoTrabajo) {
+        this.tipoTrabajo = tipoTrabajo;
+    }
+    
 }
