@@ -36,12 +36,15 @@ public class RolAgricultorDAO {
     public void setConn(Connection conn) {
         this.conn = conn;
     }
-    /***
+
+    /**
+     * *
      * Le otogar un rol al agricultor seleccionado
+     *
      * @param rol
      * @param agricultor
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public boolean otogarRol(Rol rol, Agricultor agricultor) throws SQLException {
         if (this.conn == null) {
@@ -54,14 +57,15 @@ public class RolAgricultorDAO {
         }
     }
 
-    /***
+    /**
+     * *
      * Le quita un rol al agricultor seleccionado
+     *
      * @param rol
      * @param agricultor
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
     public boolean quitarRol(Rol rol, Agricultor agricultor) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
@@ -71,6 +75,17 @@ public class RolAgricultorDAO {
             st.executeUpdate("DELETE FROM `rolesagricultores` WHERE `rolesagricultores`.`idAgricultor` = " + agricultor.getId() + " AND `rolesagricultores`.`idRol` = " + rol.getIdRol() + "");
             return true;
         }
+    }
+
+    public Connection cerrarConexion() {
+        try {
+            this.conn.close();
+            System.out.println("Cerrando conexion" + this.conn);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        this.conn = null;
+        return this.conn;
     }
 
 }

@@ -38,52 +38,55 @@ public class TrabajoDAO {
     public void setConn(Connection conn) {
         this.conn = conn;
     }
-    
-    /***
+
+    /**
+     * *
      * Crea un nuevo trabajo
+     *
      * @param parcela
      * @param agricultor
      * @param piloto
      * @param trabajo
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
-    public boolean crearTrabajo(Parcela parcela, Agricultor agricultor,Agricultor piloto, Trabajo trabajo) throws SQLException {
+    public boolean crearTrabajo(Parcela parcela, Agricultor agricultor, Agricultor piloto, Trabajo trabajo) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("INSERT INTO `trabajos` (`idTrabajo`, `idParcela`, `idPiloto`, `idAgricultor`, `idDron`, `tipoTarea`, `fechaRegistro`, `fechaRealizacion`) VALUES (NULL, '" + parcela.getId() + "', '" + piloto.getId() + "', '" + agricultor.getId() + "', NULL, '" + trabajo.getTipoTrabajo() +  "', 'CURRENT_TIMESTAMP()', NULL);");
+            st.executeUpdate("INSERT INTO `trabajos` (`idTrabajo`, `idParcela`, `idPiloto`, `idAgricultor`, `idDron`, `tipoTarea`, `fechaRegistro`, `fechaRealizacion`) VALUES (NULL, '" + parcela.getId() + "', '" + piloto.getId() + "', '" + agricultor.getId() + "', NULL, '" + trabajo.getTipoTrabajo() + "', 'CURRENT_TIMESTAMP()', NULL);");
             return true;
         }
     }
 
-    /***
+    /**
+     * *
      * Borra un trabajo
+     *
      * @param trabajo
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
     public boolean borrarTrabajo(Trabajo trabajo) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("DELETE FROM `trabajos` WHERE idTrabajo = " + trabajo.getIdTrabajo() +"");
+            st.executeUpdate("DELETE FROM `trabajos` WHERE idTrabajo = " + trabajo.getIdTrabajo() + "");
             return true;
         }
     }
-    
-    /***
+
+    /**
+     * *
      * Te permite ver todos los trabajos
+     *
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
     public ArrayList<Trabajo> verTrabajos() throws SQLException {
         ArrayList<Trabajo> trabajos = new ArrayList();
         Statement stmt = this.conn.createStatement();
@@ -94,13 +97,14 @@ public class TrabajoDAO {
         return trabajos;
     }
 
-    /***
+    /**
+     * *
      * Te permite ver todos los trabajos pendientes de un agricultor
+     *
      * @param agricultor
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
     public ArrayList<Trabajo> verTrabajosAgricultorPendiente(Agricultor agricultor) throws SQLException {
         ArrayList<Trabajo> trabajos = new ArrayList();
         Statement stmt = this.conn.createStatement();
@@ -111,13 +115,14 @@ public class TrabajoDAO {
         return trabajos;
     }
 
-    /***
+    /**
+     * *
      * Te permite ver los trabajos de un agricultor que han sido finalizados
+     *
      * @param agricultor
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
     public ArrayList<Trabajo> verTrabajosAgricultorFinalizado(Agricultor agricultor) throws SQLException {
         ArrayList<Trabajo> trabajos = new ArrayList();
         Statement stmt = this.conn.createStatement();
@@ -128,13 +133,14 @@ public class TrabajoDAO {
         return trabajos;
     }
 
-    /***
+    /**
+     * *
      * Te permite ver los trabajos pendiente de un piloto
+     *
      * @param agricultor
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
     public ArrayList<Trabajo> verTrabajosPilotoPendientes(Agricultor agricultor) throws SQLException {
         ArrayList<Trabajo> trabajos = new ArrayList();
         Statement stmt = this.conn.createStatement();
@@ -145,13 +151,14 @@ public class TrabajoDAO {
         return trabajos;
     }
 
-    /***
+    /**
+     * *
      * Te permite ver los trabajos que ha finalizado un piloto
+     *
      * @param agricultor
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
     public ArrayList<Trabajo> verTrabajosPilotoFinalizado(Agricultor agricultor) throws SQLException {
         ArrayList<Trabajo> trabajos = new ArrayList();
         Statement stmt = this.conn.createStatement();
@@ -162,16 +169,17 @@ public class TrabajoDAO {
         return trabajos;
     }
 
-    /***
+    /**
+     * *
      * Te permite realizar un trabajo
+     *
      * @param trabajo
      * @param dron
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
-    public boolean realizarTrabajo (Trabajo trabajo, Dron dron) throws SQLException{
-         if (this.conn == null) {
+    public boolean realizarTrabajo(Trabajo trabajo, Dron dron) throws SQLException {
+        if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
@@ -180,4 +188,16 @@ public class TrabajoDAO {
             return true;
         }
     }
+
+    public Connection cerrarConexion() {
+        try {
+            this.conn.close();
+            System.out.println("Cerrando conexion" + this.conn);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        this.conn = null;
+        return this.conn;
+    }
+
 }

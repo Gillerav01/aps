@@ -29,12 +29,20 @@
                 Contraseña de la BD
             </description>
             <param-name>pwdUsu</param-name>
-            <param-value></param-value>
+            <param-value/>
         </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>airdron</servlet-name>
+        <servlet-class>es.guillermo.controlador.airdron</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>controlador</servlet-name>
         <url-pattern>/controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>airdron</servlet-name>
+        <url-pattern>/airdron</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -42,6 +50,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>controlador</welcome-file>
+        <welcome-file>airdron</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -53,4 +53,10 @@ public class Dron {
     public void setMarcaDron(String marcaDron) {
         this.marcaDron = marcaDron;
     }
+
+    @Override
+    public String toString() {
+        return "Dron{" + "id=" + id + ", idPiloto=" + idPiloto + ", modeloDron=" + modeloDron + ", marcaDron=" + marcaDron + '}';
+    }
+    
 }

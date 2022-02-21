@@ -37,11 +37,14 @@ public class AgricultorDAO {
     public void setConn(Connection conn) {
         this.conn = conn;
     }
-    /***
+
+    /**
+     * *
      * Crea un agricultor en la base de datos
+     *
      * @param agricultor
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public boolean crearAgricultor(Agricultor agricultor) throws SQLException {
         if (this.conn == null) {
@@ -60,11 +63,14 @@ public class AgricultorDAO {
             return true;
         }
     }
-    /***
+
+    /**
+     * *
      * Borra un agricultor de la base de datos
+     *
      * @param agricultor
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public boolean borrarAgricultor(Agricultor agricultor) throws SQLException {
         if (this.conn == null) {
@@ -78,14 +84,15 @@ public class AgricultorDAO {
         }
     }
 
-    /***
+    /**
+     * *
      * Modifica un agricultor de la base de datos
+     *
      * @param agricultor
      * @param agricultorModificado
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
     public boolean modificarAgricultor(Agricultor agricultor, Agricultor agricultorModificado) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
@@ -106,12 +113,15 @@ public class AgricultorDAO {
             return true;
         }
     }
-    /***
+
+    /**
+     * *
      * Recupera todos los usuarios de la base de datos
+     *
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public ArrayList<Agricultor> recuperarUsuarios () throws SQLException{
+    public ArrayList<Agricultor> recuperarUsuarios() throws SQLException {
         ArrayList<Agricultor> usuarios = new ArrayList();
         Statement stmt = this.conn.createStatement();
         ResultSet result = stmt.executeQuery("SELECT * FROM agricultores");
@@ -121,13 +131,14 @@ public class AgricultorDAO {
         return usuarios;
     }
 
-    /***
+    /**
+     * *
      * Recupera los datos de un agricultor y lo devuelve en forma de objeto
+     *
      * @param id
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
     public Agricultor recuperarDatos(int id) throws SQLException {
         Statement stmt = this.conn.createStatement();
         ResultSet result = stmt.executeQuery("SELECT * FROM agricultores WHERE id = " + id);
@@ -138,12 +149,13 @@ public class AgricultorDAO {
         return agricultorRecuperado;
     }
 
-    /***
+    /**
+     * *
      * Recupera todos los pilotos de la base de datos
+     *
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    
     public ArrayList<Agricultor> recuperarPilotos() throws SQLException {
         Statement stmt = this.conn.createStatement();
         ResultSet result = stmt.executeQuery("SELECT agricultores.id, agricultores.nombre, agricultores.apellido FROM agricultores, rolesagricultores WHERE rolesagricultores.idRol = 3 AND rolesagricultores.idAgricultor = agricultores.id");
@@ -153,22 +165,38 @@ public class AgricultorDAO {
         }
         return pilotos;
     }
-    
-    /***
-     * Verifica al usuario y devuelve un objeto con la información del usuario 
+
+    /**
+     * *
+     * Verifica al usuario y devuelve un objeto con la información del usuario
      * recien logueado
+     *
      * @param login
      * @param pwd
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public Agricultor verificar(String login, String pwd) throws SQLException{
+    public Agricultor verificar(String login, String pwd) throws SQLException {
         Statement stmt = this.conn.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM agricultores WHERE dni = " + login + " OR email = " + login + ";");
-        if (result.getString("password").equals(utilidades.convertirSHA256(pwd))){
-            return new Agricultor(result.getInt("id"), result.getString("nombre"), result.getString("apellido"), result.getString("dni"), result.getString("email"), result.getString("password"));
+        ResultSet result = stmt.executeQuery("SELECT * FROM agricultores WHERE dni = '" + login + "' OR email = '" + login + "'");
+        while (result.next()) {
+            if (result.getString("password").equals(utilidades.convertirSHA256(pwd))) {
+                return new Agricultor(result.getInt("id"), result.getString("nombre"), result.getString("apellido"), result.getString("dni"), result.getString("email"), result.getString("password"));
+            }
         }
+
         return null;
     }
-    
+
+    public Connection cerrarConexion() {
+        try {
+            this.conn.close();
+            System.out.println("Cerrando conexion" + this.conn);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        this.conn = null;
+        return this.conn;
+    }
+
 }

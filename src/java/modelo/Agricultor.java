@@ -27,7 +27,7 @@ public class Agricultor {
         this.email = email;
     }
     
-    public Agricultor(int id, String nombre, String apellido, String dni, String password, String email) {
+    public Agricultor(int id, String nombre, String apellido, String dni, String email, String password) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -83,6 +83,15 @@ public class Agricultor {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "El agricultor tiene estas caracteristicas: " + "\n" +
+               "|------------------------------------------------|\n" + 
+               "| Nombre: " + this.nombre + "\n" +
+               "| Apellido: " + this.apellido + "\n" + 
+               "| DNI: " + this.dni + "\n" + 
+               "| Email: " + this.email + "\n" + 
+               "|------------------------------------------------|\n";
+    }
 }

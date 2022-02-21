@@ -31,7 +31,10 @@ public class Rol {
     public void setNombreRol(String nombreRol) {
         this.nombreRol = nombreRol;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "ID del rol: " + this.getIdRol() + ", nombre del rol: " + this.getNombreRol();
+    }
     
 }

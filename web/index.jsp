@@ -18,7 +18,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     </head>
     <body class="principal">
-        <form action="controlador" method="post" class="formularioLogueo" autocomplete="off">
+        <form action="airdron" method="POST" class="formularioLogueo" autocomplete="off">
             <h1>Gestion de drones y parcelas</h1>
             <input type="text" placeholder="Introduzca su DNI o Correo" id="campoNombre" name="login" class="campoNombre campoTexto">
             <input type="password" placeholder="Introduzca su contraseña" name="pwd" id="pwd" class="campoContraseña campoTexto">
@@ -26,6 +26,7 @@
                 <input type="submit" value="Iniciar sesion" name="inSesion" id="iniciarSesion" class="boton">
                 <input type="submit" value="Registrarse" name="registrarse" class="boton">
             </section>
+            <input type="hidden" name="come" value="index">
             <section id="errores" class="errores"></section>
         </form>
     </body>

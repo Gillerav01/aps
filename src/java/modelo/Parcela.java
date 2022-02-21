@@ -97,6 +97,11 @@ public class Parcela {
     public void setPuntos(String puntos) {
         this.puntos = puntos;
     }
+
+    @Override
+    public String toString() {
+        return "Parcela{" + "id=" + id + ", nomParcela=" + nomParcela + ", area=" + area + ", idAgricultor=" + idAgricultor + ", direccionArchivo=" + direccionArchivo + ", provincia=" + provincia + ", municipio=" + municipio + ", puntos=" + puntos + '}';
+    }
     
     
     
