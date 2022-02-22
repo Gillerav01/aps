@@ -91,13 +91,11 @@ function validarLogin() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    if (window.location.pathname == "/AgriculturaJardineriaPHP/registro.php") {
         document.getElementById("enviar").addEventListener("click", (e) => {
             if (!validarRegistro()) {
                 e.preventDefault();
             }
         });
-    }
 });
 
 function dibujarParcela(idParcela) {

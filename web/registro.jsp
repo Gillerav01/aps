@@ -22,13 +22,14 @@
     </head>
 
     <body>
-        <form action="registro.php" method="post" id="formularioRegistro" class="formularioRegistro" autocomplete="off">
+        <form action="airdron" method="post" id="formularioRegistro" class="formularioRegistro" autocomplete="off">
             <h1>REGISTRO</h1>
             <input type="text" placeholder="Introduzca su DNI" name="dni" id="dni" class="campoTexto">
             <input type="text" placeholder="Introduzca su Nombre" name="nombre" id="nombre" class="campoTexto">
             <input type="text" placeholder="Introduzca su Apellido" name="apellido" id="apellido" class="campoTexto">
             <input type="password" placeholder="Introduzca su contraseña" name="pwd" id="pwd" class="campoTexto">
             <input type="password" placeholder="Confirme su contraseña" name="pwdConfirmada" id="pwdConfirmada" class="campoTexto">
+            <input type="hidden" value="paginaRegistro" name="come">
             <input type="text" placeholder="Introduzca su email" name="email" id="correo" class="campoTexto">
             <section class="botones">
                 <input type="submit" value="Registrarse" name="registrarse" id="enviar" class="boton">

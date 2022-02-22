@@ -18,7 +18,7 @@ public class Agricultor {
         this.password = password;
         this.email = email;
     }
-
+    
     public Agricultor(int id, String nombre, String apellido, String dni, String email) {
         this.id = id;
         this.nombre = nombre;

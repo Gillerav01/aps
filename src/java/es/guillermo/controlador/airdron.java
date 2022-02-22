@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lib.utilidades;
 import modelo.Agricultor;
 import modelo.Dron;
 import modelo.Parcela;
@@ -108,7 +109,36 @@ public class airdron extends HttpServlet {
                 }
             } else if (registro != null) {
                 if (registro.equals("Registrarse")) {
-                    System.out.println("Registro vale: " + registro);
+                    rd = getServletContext().getRequestDispatcher("/registro.jsp");
+                    rd.forward(request, response);
+                }
+            }
+        } else if (come.equals("paginaRegistro")) {
+            String btnRegistro = (String) request.getParameter("registrarse");
+            String btnCancelar = (String) request.getParameter("cancelar");
+            System.out.println("Valor del boton de registro: " + btnRegistro);
+            System.out.println("Valor del boton cancelar: " + btnCancelar);
+            if (btnRegistro != null) {
+                System.out.println("btnRegistro no es null");
+                if (btnRegistro.equals("Registrarse")) {
+                    System.out.println("He entrado a registrarse");
+                    conn = bdActual.getConexion();
+                    AgricultorDAO nuevoUsuario = new AgricultorDAO();
+                    nuevoUsuario.setConn(conn);
+                    nuevoUsuario.crearAgricultor(new Agricultor((String) request.getParameter("nombre"), (String) request.getParameter("apellido"), (String) request.getParameter("dni"), utilidades.convertirSHA256((String) request.getParameter("pwdConfirmada")), (String) request.getParameter("email")));
+                    nuevoUsuario.cerrarConexion();
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("mensaje", "<p class=\"success\">Usuario creado correctamente.</p>");
+                    rd = getServletContext().getRequestDispatcher("/index.jsp");
+                    rd.forward(request, response);
+                }
+            }
+            if (btnCancelar != null) {
+                System.out.println("btnCancelar no es null");
+                if (btnCancelar.equals("Cancelar")) {
+                    System.out.println("He entrado a cancelar");
+                    rd = getServletContext().getRequestDispatcher("/index.jsp");
+                    rd.forward(request, response);
                 }
             }
         }
