@@ -1,6 +1,6 @@
 <%-- 
-    Document   : gestionarRoles
-    Created on : 31-ene-2022, 17:41:33
+    Document   : gestionarDrones
+    Created on : 31-ene-2022, 17:41:01
     Author     : DAW209
 --%>
 
@@ -34,8 +34,8 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="menuPrincipal.php">DronAir
-                        <a class="navbar-brand" href="menuPrincipal.php">
+                    <a class="navbar-brand" href="menuPrincipal.jsp">DronAir
+                        <a class="navbar-brand" href="menuPrincipal.jsp">
                             <img src="img/dronLogo.png" alt="" width="70px">
                         </a></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
                             <!-- Todos -->
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="airdron?come=menu&seccion=inicio">Inicio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <a class="nav-link active" aria-current="page" href="menuPrincipal.jsp">Inicio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                     </svg></a>
@@ -57,7 +57,7 @@
                                     if (rol.getNombreRol().equals("Agricultor")) {
                             %>
                             <li class="nav-item">
-                                <a class="nav-link" href="airdron?come=menu&seccion=gestionParcelas">Gestionar parcelas <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map">
+                                <a class="nav-link" href="gestionarParcelas.jsp">Gestionar parcelas <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map">
                                     <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
                                     <line x1="8" y1="2" x2="8" y2="18"></line>
                                     <line x1="16" y1="6" x2="16" y2="22"></line>
@@ -97,7 +97,7 @@
                                     if (rol.getNombreRol().equals("Agricultor") || rol.getNombreRol().equals("Piloto")) {
                             %>
                             <li class="nav-item">
-                                <a class="nav-link" href="airdron?come=menu&seccion=gestionarTrabajos">Gestionar trabajos <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase">
+                                <a class="nav-link" href="gestionarTrabajos.jsp">Gestionar trabajos <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase">
                                     <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                                     <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                                     </svg></a>
@@ -113,7 +113,7 @@
                                     if (rol.getNombreRol().equals("Piloto")) {
                             %>
                             <li class="nav-item">
-                                <a class="nav-link" href="airdron?come=menu&seccion=gestionarDrones">Gestionar drones <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-command">
+                                <a class="nav-link" href="gestionarDrones.jsp">Gestionar drones <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-command">
                                     <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path>
                                     </svg></a>
                             </li>

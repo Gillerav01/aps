@@ -141,24 +141,6 @@ public class airdron extends HttpServlet {
                     rd.forward(request, response);
                 }
             }
-        } else if (come.equals("menu")) {
-            String seccion = request.getParameter("seccion");
-            if (seccion.equals("inicio")) {
-                rd = getServletContext().getRequestDispatcher("/menuPrincipal.jsp");
-                rd.forward(request, response);
-            } else if (seccion.equals("gestionarTrabajos")) {
-                rd = getServletContext().getRequestDispatcher("/gestionarTrabajos.jsp");
-                rd.forward(request, response);
-            } else if (seccion.equals("gestionarRoles")) {
-                rd = getServletContext().getRequestDispatcher("/gestionarRoles.jsp");
-                rd.forward(request, response);
-            } else if (seccion.equals("gestionParcelas")) {
-                rd = getServletContext().getRequestDispatcher("/gestionarParcelas.jsp");
-                rd.forward(request, response);
-            } else if (seccion.equals("gestionarDrones")) {
-                rd = getServletContext().getRequestDispatcher("/gestionarDrones.jsp");
-                rd.forward(request, response);
-            }
         } else if (come.equals("cerrarSesion")) {
             HttpSession session = request.getSession(true);
             session.invalidate();

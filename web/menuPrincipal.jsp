@@ -1,6 +1,6 @@
 <%-- 
-    Document   : menuPrincipal
-    Created on : 31-ene-2022, 17:53:06
+    Document   : gestionarDrones
+    Created on : 31-ene-2022, 17:41:01
     Author     : DAW209
 --%>
 
@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     </head>
+
     <body class="d-flex flex-column" style="background-image: url('img/fondo.jpg'); overflow-x: hidden; background-repeat: no-repeat; background-size: cover;">
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -136,17 +137,9 @@
                 </div>
             </nav>
         </header>
-        <%
-            if (!rolesActuales.isEmpty()) {
-        %>
         <main class="row d-flex">
-            
+
         </main>
-        <%
-            } else {
-                out.print("No tienes roles.");
-            }
-        %>
         <footer class="text-center text-lg-start text-white" style="background-color: #28242c; width: 100%;">
             <hr class="mb-4" />
             <section class="mb-4 text-center">

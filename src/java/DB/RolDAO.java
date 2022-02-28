@@ -159,7 +159,7 @@ public class RolDAO {
     }
 
     /**
-     * *
+     *
      * Te permite ver los roles que SI tiene un usuario
      *
      * @param agricultor
