@@ -4,6 +4,14 @@
     Author     : DAW209
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="modelo.Rol"%>
+<%@page import="modelo.Agricultor"%>
+<%
+    Agricultor actual = (Agricultor) session.getAttribute("agricultorLogueado");
+    ArrayList<Rol> rolesActuales = (ArrayList<Rol>) session.getAttribute("rolesLogueado");
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,7 +45,7 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
                             <!-- Todos -->
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="menuPrincipal.php">Inicio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <a class="nav-link active" aria-current="page" href="airdron?come=menu&seccion=inicio">Inicio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                     </svg></a>
@@ -45,24 +53,28 @@
 
                             <!-- Agricultor -->
                             <%
-                                if (rolesActuales.contains("Agricultor")) {
+                                for (Rol rol : rolesActuales) {
+                                    if (rol.getNombreRol().equals("Agricultor")) {
                             %>
                             <li class="nav-item">
-                                <a class="nav-link" href="gestionarParcelas.php">Gestionar parcelas <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map">
+                                <a class="nav-link" href="airdron?come=menu&seccion=gestionParcelas">Gestionar parcelas <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map">
                                     <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
                                     <line x1="8" y1="2" x2="8" y2="18"></line>
                                     <line x1="16" y1="6" x2="16" y2="22"></line>
                                     </svg></a>
                             </li>
                             <%
+                                        break;
+                                    }
                                 }
                             %>
                             <!-- Administrador -->
                             <%
-                                if (rolesActuales.contains("Administrador")) {
+                                for (Rol rol : rolesActuales) {
+                                    if (rol.getNombreRol().equals("Administrador")) {
                             %>
                             <li class="nav-item">
-                                <a class="nav-link" href="gestionarRoles.php">Gestionar roles <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders">
+                                <a class="nav-link" href="gestionarRoles.jsp">Gestionar roles <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders">
                                     <line x1="4" y1="21" x2="4" y2="14"></line>
                                     <line x1="4" y1="10" x2="4" y2="3"></line>
                                     <line x1="12" y1="21" x2="12" y2="12"></line>
@@ -75,31 +87,39 @@
                                     </svg></a>
                             </li>
                             <%
+                                        break;
+                                    }
                                 }
                             %>
                             <!-- Agricultor y piloto -->
                             <%
-                                if (rolesActuales.contains("Agricultor") || rolesActuales.contains("Piloto")) {
+                                for (Rol rol : rolesActuales) {
+                                    if (rol.getNombreRol().equals("Agricultor") || rol.getNombreRol().equals("Piloto")) {
                             %>
                             <li class="nav-item">
-                                <a class="nav-link" href="gestionarTrabajos.php">Gestionar trabajos <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase">
+                                <a class="nav-link" href="airdron?come=menu&seccion=gestionarTrabajos">Gestionar trabajos <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase">
                                     <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                                     <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                                     </svg></a>
                             </li>
                             <%
+                                        break;
+                                    }
                                 }
                             %>
                             <!-- Piloto -->
                             <%
-                                if (rolesActuales.contains("Piloto")) {
+                                for (Rol rol : rolesActuales) {
+                                    if (rol.getNombreRol().equals("Piloto")) {
                             %>
                             <li class="nav-item">
-                                <a class="nav-link" href="gestionarDrones.php">Gestionar drones <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-command">
+                                <a class="nav-link" href="airdron?come=menu&seccion=gestionarDrones">Gestionar drones <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-command">
                                     <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path>
                                     </svg></a>
                             </li>
                             <%
+                                        break;
+                                    }
                                 }
                             %>
                         </ul>
@@ -107,7 +127,7 @@
                         <!-- Todos -->
 
                         <section>
-                            <a class="nav-link" href="index.php?cerrarSesion=true" style="text-align: center; color: white;">Cerrar sesion <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
+                            <a class="nav-link" href="airdron?come=cerrarSesion" style="text-align: center; color: white;">Cerrar sesion <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                 <polyline points="16 17 21 12 16 7"></polyline>
                                 <line x1="21" y1="12" x2="9" y2="12"></line>

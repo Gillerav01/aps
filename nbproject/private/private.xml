@@ -12,13 +12,13 @@
         </group>
         <group>
             <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/gestionarParcelas.jsp</file>
-            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/index.jsp</file>
-            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/registro.jsp</file>
             <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/src/java/es/guillermo/controlador/airdron.java</file>
+            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/registro.jsp</file>
             <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/gestionarDrones.jsp</file>
             <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/menuPrincipal.jsp</file>
-            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/gestionarTrabajos.jsp</file>
+            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/js/main.js</file>
             <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/gestionarRoles.jsp</file>
+            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/gestionarTrabajos.jsp</file>
         </group>
     </open-files>
 </project-private>
