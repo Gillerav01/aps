@@ -29,7 +29,9 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     </head>
-
+    <%
+        if (actual != null) {
+    %>
     <body class="d-flex flex-column" style="background-image: url('img/fondo.jpg'); overflow-x: hidden; background-repeat: no-repeat; background-size: cover;">
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -125,7 +127,6 @@
                         </ul>
 
                         <!-- Todos -->
-
                         <section>
                             <a class="nav-link" href="airdron?come=cerrarSesion" style="text-align: center; color: white;">Cerrar sesion <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -138,7 +139,42 @@
             </nav>
         </header>
         <main class="row d-flex">
-
+            <section class="col-12 col-xl-6 bg-light d-flex p-2 flex-column justify-content-center align-items-center rounded" style="margin-right: 7%;">
+                <h1 style="color: black;">Bienvenido, <%=actual.getNombre()%></h1>
+                <form action="airdron" style="width: 100%;" class="d-flex p-4 flex-column justify-content-center align-items-center" method="post">
+                    <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
+                        <label for="id">ID: </label>
+                        <input type="text" value="<%=actual.getId()%>" disabled style="width: 50%;">
+                    </section>
+                    <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
+                        <label for="nombre">Nombre: </label>
+                        <input type="text" placeholder="<%=actual.getNombre()%>" style="width: 50%;" name="nuevoNombre" id="nombre">
+                    </section>
+                    <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
+                        <label for="apellidos">Apellidos: </label>
+                        <input type="text" placeholder="<%=actual.getApellido()%>" style="width: 50%;" name="nuevoApellido" id="apellidos">
+                    </section>
+                    <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
+                        <label for="dni">DNI: </label>
+                        <input type="text" placeholder="<%=actual.getDni()%>" style="width: 50%;" name="nuevoDNI" id="dni">
+                    </section>
+                    <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
+                        <label for="correo">Correo: </label>
+                        <input type="email" placeholder="<%=actual.getEmail()%>" style="width: 50%;" name="nuevoCorreo" id="correo">
+                    </section>
+                    <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
+                        <label for="contrasena">Nueva contraseña: </label>
+                        <input type="password" placeholder="Contraseña nueva" style="width: 50%;" name="nuevaContraseña" id="contrasena">
+                    </section>
+                    <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
+                        <label for="confContrasena">Confirmar nueva contraseña: </label>
+                        <input type="password" placeholder="Confirmar contraseña nueva" style="width: 50%;" name="nuevoconfContraseña" id="confContrasena">
+                    </section>
+                    <input type="hidden" value="cambiarDatos" name="come">
+                    <input type="submit" class="btn btn-dark" style="width: 100%; margin-top: 4px" value="Cambiar datos" id="cambiarDatos" name="cambiarDatos">
+                    <input type="reset" class="btn btn-dark" style="width: 100%; margin-top: 2px" value="Reiniciar formulario" id="reiniciarFormulario">
+                </form>
+            </section>
         </main>
         <footer class="text-center text-lg-start text-white" style="background-color: #28242c; width: 100%;">
             <hr class="mb-4" />
@@ -167,4 +203,7 @@
         </div>
     </footer>
 </body>
+<%
+    }
+%>
 </html>

@@ -146,6 +146,12 @@ public class airdron extends HttpServlet {
             session.invalidate();
             rd = getServletContext().getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
+        } else if (come.equals("cambiarDatos")) {
+            conn = bdActual.getConexion();
+            AgricultorDAO nuevoUsuario = new AgricultorDAO();
+            nuevoUsuario.setConn(conn);
+            HttpSession session = request.getSession(true);
+            nuevoUsuario.modificarAgricultor((Agricultor) session.getAttribute("agricultorLogueado"), new Agricultor());
         }
     }
 
