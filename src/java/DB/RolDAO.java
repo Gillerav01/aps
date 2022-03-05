@@ -139,13 +139,44 @@ public class RolDAO {
         AgricultorDAO adao = new AgricultorDAO();
         adao.setConn(conn);
         ArrayList <Agricultor> usuarios = adao.recuperarUsuarios();
-        System.out.println(usuarios.toString());
-        adao.cerrarConexion();
+        RolDAO comprobarRoles = new RolDAO();
+        comprobarRoles.setConn(conn);
         for(Agricultor a : usuarios){
-            
+            ArrayList <Rol> rolesObtenidos = comprobarRoles.verRolesUsuario(a);
+            if(rolesObtenidos.isEmpty()){
+                agricultoresSinRol.add(a);
+            }
         }
+        
+        adao.cerrarConexion();
+        comprobarRoles.cerrarConexion();
+        System.out.println(agricultoresSinRol.toString());
         return agricultoresSinRol;
     }
+    
+        public static ArrayList<Agricultor> verUsuarioConRoles() throws SQLException {
+        ConectorBD bdActual = new ConectorBD("localhost", "agr_precision", "root", "");
+        Connection conn;
+        conn = bdActual.getConexion();
+        ArrayList <Agricultor> agricultoresSinRol = new ArrayList();
+        AgricultorDAO adao = new AgricultorDAO();
+        adao.setConn(conn);
+        ArrayList <Agricultor> usuarios = adao.recuperarUsuarios();
+        RolDAO comprobarRoles = new RolDAO();
+        comprobarRoles.setConn(conn);
+        for(Agricultor a : usuarios){
+            ArrayList <Rol> rolesObtenidos = comprobarRoles.verRolesUsuario(a);
+            if(!rolesObtenidos.isEmpty()){
+                agricultoresSinRol.add(a);
+            }
+        }
+        
+        adao.cerrarConexion();
+        comprobarRoles.cerrarConexion();
+        System.out.println(agricultoresSinRol.toString());
+        return agricultoresSinRol;
+    }
+        
 
     /**
      * *

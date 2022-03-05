@@ -16,6 +16,7 @@
     Agricultor actual = (Agricultor) session.getAttribute("agricultorLogueado");
     ArrayList<Rol> rolesActuales = (ArrayList<Rol>) session.getAttribute("rolesLogueado");
     ArrayList<Agricultor> usuariosSinRol = RolDAO.verUsuarioSinRoles();
+    ArrayList<Agricultor> usuariosConRol = RolDAO.verUsuarioConRoles();
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -150,7 +151,37 @@
             <%
                 for (Rol rol : rolesActuales) {
                     if (rol.getNombreRol().equals("Administrador")) {
+                        if (request.getParameter("idUsuario") != null) {
+                            
 
+            %>
+            <section class="container col-12 col-xl-12 bg-dark">
+                <section class="container col-12 col-xl-10 d-flex justify-content-evenly">
+                    <section class="col-12 col-xl-5 bg-white d-flex flex-column justify-content-center align-items-center rounded">
+                        <h3 class="text-center" style="color:black;">Añadir rol</h3>
+                        <form action="airdron" class="">
+                            <select name="añadirRolSelect">
+
+                            </select>
+                            <input type="hidden" name="id" value="<%=request.getParameter("idUsuario")%>">
+                            <input type="hidden" name="come" value="anadirRol">
+                            <input type="submit" name="añadirRol" value="Añadir">
+                        </form>
+                    </section>
+                    <section class="col-12 col-xl-5 bg-light  d-flex flex-column justify-content-center align-items-center rounded">
+                        <h3 class="text-center" style="color:black;">Eliminar rol</h3>
+                        <form action="airdron" class="">
+                            <select name="borrarRolSelect">
+                            </select>
+                            <input type="hidden" name="id" value="<%=request.getParameter("idUsuario")%>">
+                            <input type="hidden" name="come" value="borrarRol">
+                            <input type="submit" name="borrarRol" value="Borrar">
+                        </form>
+                    </section>
+                </section>
+            </section>
+            <%
+                }
             %>
             <section class="container col-12 col-xl-4 bg-dark">
                 <table class="table table-dark table-hover">
@@ -164,12 +195,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <%                            for (Agricultor usuarioSinRol : usuariosSinRol) {
+                        %>
                         <tr>
-                            <th scope="row"><?= $usuariosTabla[$i][0] ?></th>
-                            <td><?= $usuariosTabla[$i][3] ?></td>
-                            <td><?= $usuariosTabla[$i][1] ?> <?= $usuariosTabla[$i][2] ?></td>
-                            <td><a href="gestionarRoles.php?idUsuario=<?= $usuariosTabla[$i][0] ?>&anadirRol=true" class="btn btn-danger">Añadir roles al usuario</a></td>
+                            <th scope="row"><%=usuarioSinRol.getId()%></th>
+                            <td><%=usuarioSinRol.getDni()%></td>
+                            <td><%=usuarioSinRol.getNombre()%> <%=usuarioSinRol.getApellido()%></td>
+                            <td><a href="gestionarRoles.jsp?idUsuario=<%=usuarioSinRol.getId()%>" class="btn btn-danger">Añadir roles al usuario</a></td>
                         <tr>
+                            <%
+                                }
+                            %>
                     </tbody>
                 </table>
             </section>
@@ -184,23 +220,22 @@
                             <th scope="col">Correo</th>
                             <th scope="col">Roles</th>
                             <th scope="col"></th>
-                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?PHP
-                        for ($i = 0; $i < count($usuariosTabla); $i++) {
-                        ?>
+                        <%
+                            for (Agricultor usuarioConRol : usuariosConRol) {
+                        %>
                         <tr>
-                            <th scope="row"><?= $usuariosTabla[$i][0] ?></th>
-                            <td><?= $usuariosTabla[$i][3] ?></td>
-                            <td><?= $usuariosTabla[$i][1] ?> <?= $usuariosTabla[$i][2] ?></td>
-                            <td><a href="mailto:<?= $usuariosTabla[$i][4] ?>" class="label" style="color: #ffffff;"><?= $usuariosTabla[$i][4] ?></a></td>
-                            <td><a href="gestionarRoles.php?idUsuario=<?= $usuariosTabla[$i][0] ?>&gestionarUsuario=true" class="btn btn-primary">Gestionar roles</a></td>
+                            <th scope="row"><%=usuarioConRol.getId()%></th>
+                            <td><%=usuarioConRol.getDni()%></td>
+                            <td><%=usuarioConRol.getNombre()%> <%=usuarioConRol.getApellido()%></td>
+                            <td><a href="mailto:<%=usuarioConRol.getEmail()%>" class="label" style="color: #ffffff;"><%=usuarioConRol.getEmail()%></a></td>
+                            <td><a href="gestionarRoles.jsp?idUsuario=<%=usuarioConRol.getId()%>" class="btn btn-primary">Gestionar roles</a></td>
                         <tr>
-                            <?PHP
-                            }
-                            ?>
+                            <%
+                                }
+                            %>
                     </tbody>
                 </table>
             </section>

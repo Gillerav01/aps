@@ -13,10 +13,11 @@
             <file>file:/D:/Users/DAW209/Documents/NetBeansProjects/JardineriaPrecisionSERVLET/src/java/DB/AgricultorDAO.java</file>
         </group>
         <group>
-            <file>file:/C:/xampp/htdocs/Proyecto/aps/src/java/DB/RolDAO.java</file>
-            <file>file:/C:/xampp/htdocs/Proyecto/aps/src/java/es/guillermo/controlador/airdron.java</file>
-            <file>file:/C:/xampp/htdocs/Proyecto/aps/src/java/DB/AgricultorDAO.java</file>
-            <file>file:/C:/xampp/htdocs/Proyecto/aps/web/gestionarRoles.jsp</file>
+            <file>file:/home/guillermo/NetBeansProjects/aps/src/java/DB/AgricultorDAO.java</file>
+            <file>file:/home/guillermo/NetBeansProjects/aps/src/java/DB/RolDAO.java</file>
+            <file>file:/home/guillermo/NetBeansProjects/aps/web/gestionarRoles.jsp</file>
+            <file>file:/home/guillermo/NetBeansProjects/aps/web/gestionarTrabajos.jsp</file>
+            <file>file:/home/guillermo/NetBeansProjects/aps/src/java/modelo/Rol.java</file>
         </group>
     </open-files>
 </project-private>
