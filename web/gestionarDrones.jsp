@@ -4,12 +4,14 @@
     Author     : DAW209
 --%>
 
+<%@page import="modelo.Dron"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Rol"%>
 <%@page import="modelo.Agricultor"%>
 <%
     Agricultor actual = (Agricultor) session.getAttribute("agricultorLogueado");
     ArrayList<Rol> rolesActuales = (ArrayList<Rol>) session.getAttribute("rolesLogueado");
+    ArrayList<Dron> dronesUsuario = (ArrayList<Dron>) session.getAttribute("dronesUsuario");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -144,7 +146,51 @@
             </nav>
         </header>
         <main class="row d-flex">
-
+            <%
+                for (Rol rol : rolesActuales) {
+                    if (rol.getNombreRol().equals("Piloto")) {
+            %>
+            <section class="container col-12 col-xl-5 d-flex flex-column p-2" style="background-color: white; margin-top: 5vh">
+                <h3 style="text-align: center; color: black;">Registrar dron</h3>
+                <form action="airdron" method="post" class="d-flex flex-column justify-content-center align-items-center rounded">
+                    <input type="text" placeholder="Modelo del dron" name="modeloDron">
+                    <input type="text" placeholder="Marca del dron" name="marcaDron">
+                    <input type="hidden" value="crearDron" name="come">
+                    <input type="submit" value="Registrar dron" name="habilitarDron" class="btn btn-primary m-1" style="width: 100%;">
+                </form>
+            </section>
+            <section class="container col-12 col-xl-8 d-flex flex-column p-2" style="background-color: white; margin-top: 10vh;">
+                <h3 style="text-align: center; color: black;">Mis drones</h3>
+                <table class="table table-white table-hover" style="width: 100%; text-align: center;">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Modelo Dron</th>
+                            <th scope="col">Marca dron</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            for (Dron dron : dronesUsuario) {
+                        %>
+                        <tr>
+                            <td><%=dron.getId()%></td>
+                            <td><%=dron.getModeloDron()%></td>
+                            <td><%=dron.getMarcaDron()%></td>
+                            <td><a href="airdron?idDr=<%=dron.getId()%>&come=borrarDron" class="btn btn-danger">Borrar dron</a></td>
+                        <tr>
+                            <%
+                                }
+                            %>
+                    </tbody>
+                </table>
+            </section>
+            <%
+                        break;
+                    }
+                }
+            %>
         </main>
         <footer class="text-center text-lg-start text-white" style="background-color: #28242c; width: 100%;">
             <hr class="mb-4" />
@@ -174,7 +220,7 @@
     </footer>
 </body>
 <%
-        break;
+                break;
             }
         }
     }

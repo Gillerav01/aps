@@ -4,12 +4,17 @@
     Author     : DAW209
 --%>
 
+<%@page import="modelo.Dron"%>
+<%@page import="lib.utilidades"%>
+<%@page import="modelo.Parcela"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Rol"%>
 <%@page import="modelo.Agricultor"%>
 <%
     Agricultor actual = (Agricultor) session.getAttribute("agricultorLogueado");
     ArrayList<Rol> rolesActuales = (ArrayList<Rol>) session.getAttribute("rolesLogueado");
+    ArrayList<Parcela> parcelasUsuario = (ArrayList<Parcela>) session.getAttribute("parcelasUsuario");
+    ArrayList<Dron> dronesUsuario = (ArrayList<Dron>) session.getAttribute("dronesUsuario");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -139,7 +144,7 @@
             </nav>
         </header>
         <main class="row d-flex">
-            <section class="col-12 col-xl-6 bg-light d-flex p-2 flex-column justify-content-center align-items-center rounded" style="margin-right: 7%;">
+            <section class="col-12 col-xl-5 bg-light d-flex p-2 flex-column justify-content-center align-items-center rounded" style="margin-right: 7%;">
                 <h1 style="color: black;">Bienvenido, <%=actual.getNombre()%></h1>
                 <form action="airdron" style="width: 100%;" class="d-flex p-4 flex-column justify-content-center align-items-center">
                     <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
@@ -166,6 +171,129 @@
                     <input type="submit" class="btn btn-dark" style="width: 100%; margin-top: 4px" value="Cambiar datos" id="cambiarDatos" name="cambiarDatos">
                     <input type="reset" class="btn btn-dark" style="width: 100%; margin-top: 2px" value="Reiniciar formulario" id="reiniciarFormulario">
                 </form>
+            </section>
+            <section class="col-12 col-xl-5 bg-light d-flex p-2 flex-column justify-content-center align-items-center rounded">
+                <%
+                    for (Rol rol : rolesActuales) {
+                        if (rol.getNombreRol().equals("Agricultor")) {
+                            if (parcelasUsuario.isEmpty()) {
+                                out.println("<p> No hay parcelas para mostrar. </p>");
+                            } else {
+                %>
+                <article class="col-12 col-xl-5 bg-light mt-2" style="width: 100%;">
+                    <div id="carouselParcelas" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
+                        <div class="carousel-inner">
+                            <%
+                                int i = 0;
+                                for (Parcela parcela : parcelasUsuario) {
+                                    if (i == 0) {
+                            %>
+                            <div class="carousel-item active">
+                                <div class="card" style="width: 80%; margin: auto auto; text-align: center; border: 1px solid black;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Parcela con ID <%=parcela.getId()%></h5>
+                                        <p class="card-text">Nombre parcela: <%=parcela.getNomParcela()%></p>
+                                        <p class="card-text">Area: <%=parcela.getArea()%></p>
+                                        <p class="card-text">Ubicado en: <%=utilidades.devolverProvincia(parcela.getProvincia())%></p>
+                                        <a href="gestionarParcelas.jsp" class="btn btn-dark">Gestionar parcelas</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                                i = i + 1;
+                            } else {
+                            %>
+                            <div class="carousel-item">
+                                <div class="card" style="width: 80%; margin: auto auto; text-align: center; border: 1px solid black;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Parcela con ID <%=parcela.getId()%></h5>
+                                        <p class="card-text">Nombre parcela: <%=parcela.getNomParcela()%></p>
+                                        <p class="card-text">Area: <%=parcela.getArea()%></p>
+                                        <p class="card-text">Ubicado en: <%=utilidades.devolverProvincia(parcela.getProvincia())%></p>
+                                        <a href="gestionarParcelas.jsp" class="btn btn-dark">Gestionar parcelas</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                                        }
+                                    }
+                                }
+                            %>
+
+                            <%
+                                        break;
+                                    }
+                                }
+                            %>
+                            <div class="carousel-item">
+                                <div class="card" style="width: 80%; margin: auto auto; text-align: center; border: 1px solid black;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Añadir parcela nueva</h5>
+                                        <a href="gestionarParcelas.jsp" class="btn btn-dark">Añadir parcela</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <%
+                    for (Rol rol : rolesActuales) {
+                        if (rol.getNombreRol().equals("Piloto")) {
+                            if (dronesUsuario.isEmpty()) {
+                                out.println("<p> No hay drones para mostrar. </p>");
+                            } else {
+                %>
+                <article class="col-12 col-xl-5 bg-light mt-2" style="width: 100%;">
+                    <div id="carouselDrones" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
+                        <div class="carousel-inner">
+                            <%
+                                int i = 0;
+                                for (Dron dron : dronesUsuario) {
+                                    if (i == 0) {
+                            %>
+                            <div class="carousel-item active">
+                                <div class="card" style="width: 80%; margin: auto auto; text-align: center; border: 1px solid black;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Dron con ID <%=dron.getId()%></h5>
+                                        <p class="card-text">Modelo dron: <%=dron.getModeloDron()%></p>
+                                        <p class="card-text">Ubicado en: <%=dron.getMarcaDron()%></p>
+                                        <a href="gestionarDrones.jsp" class="btn btn-dark">Gestionar drones</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                                i = i + 1;
+                            } else {
+                            %>
+                            <div class="carousel-item">
+                                <div class="card" style="width: 80%; margin: auto auto; text-align: center; border: 1px solid black;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Dron con ID <%=dron.getId()%></h5>
+                                        <p class="card-text">Modelo dron: <%=dron.getModeloDron()%></p>
+                                        <p class="card-text">Ubicado en: <%=dron.getMarcaDron()%></p>
+                                        <a href="gestionarDrones.jsp" class="btn btn-dark">Gestionar drones</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                                }
+                            %>
+                            <div class="carousel-item">
+                                <div class="card" style="width: 80%; margin: auto auto; text-align: center; border: 1px solid black;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Añadir dron nuevo</h5>
+                                        <a href="gestionarDrones.jsp" class="btn btn-dark">Añadir dron</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <%
+                }
+            }
+        }
+    }
+                    %>
             </section>
         </main>
         <footer class="text-center text-lg-start text-white" style="background-color: #28242c; width: 100%;">
@@ -199,3 +327,71 @@
     }
 %>
 </html>
+
+<!--
+    
+                <section class="col-12 col-xl-5 bg-light d-flex p-1 flex-column justify-content-center rounded">
+                    <?PHP
+                    if (in_array("Piloto", $_SESSION["listaRoles[]"])) {
+                        $dronesActuales = verDrones($_SESSION["usuarioActual"][0]);
+                        if (@count($dronesActuales) > 0) {
+                    ?>
+                        <article class="col-12 col-xl-5 bg-light" style="width: 100%;">
+                            <div id="carouselDrones" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
+                                <div class="carousel-inner">
+                                    <?php
+                                        for ($i = 0; $i < count($dronesActuales); $i++) {
+                                            if ($i == 0) {
+                                    ?>
+                                                <div class="carousel-item active">
+                                                    <div class="card" style="width: 80%; margin: auto auto; text-align: center; border: 1px solid black; min-height: 100%">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Dron con ID <?= $dronesActuales[$i][0] ?></h5>
+                                                            <p class="card-text">Modelo: <?= $dronesActuales[$i][2] ?></p>
+                                                            <p class="card-text">Marca: <?= $dronesActuales[$i][3] ?></p>
+                                                            <a href="gestionarDrones.php" class="btn btn-dark">Gestionar drones</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?PHP
+                                            } else {
+                                            ?>
+                                                <div class="carousel-item">
+                                                    <div class="card" style="width: 80%; margin: auto auto; text-align: center; border: 1px solid black; min-height: 100%">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Dron con ID <?= $dronesActuales[$i][0] ?></h5>
+                                                            <p class="card-text">Modelo: <?= $dronesActuales[$i][2] ?></p>
+                                                            <p class="card-text">Marca: <?= $dronesActuales[$i][3] ?></p>
+                                                            <a href="gestionarDrones.php" class="btn btn-dark">Gestionar drones</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    <?PHP
+                                            }
+                                        }
+                                    } else {
+                                        ?>
+                                        <p> No hay parcelas para mostrar...</p> <a href="gestionarParcelas.php" class="btn btn-dark">Gestionar parcelas</a>
+                                        <?PHP
+                                    }
+                                    ?>
+                                    <div class="carousel-item">
+                                        <div class="card" style="width: 80%; margin: auto auto; text-align: center; border: 1px solid black; min-height: 100%">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Añadir dron nuevo</h5>
+                                                <a href="gestionarParcelas.php" class="btn btn-dark">Añadir dron</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDrones" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselDrones" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </article>
+-->

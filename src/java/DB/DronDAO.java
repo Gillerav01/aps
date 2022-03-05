@@ -47,6 +47,7 @@ public class DronDAO {
      * @throws SQLException
      */
     public boolean crearDron(Dron dron, Agricultor agricultor) throws SQLException {
+        System.out.println(agricultor.getNombre());
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
@@ -71,14 +72,14 @@ public class DronDAO {
      * @return
      * @throws SQLException
      */
-    public boolean borrarDron(Dron dron) throws SQLException {
+    public boolean borrarDron(int id) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
             Statement st = this.conn.createStatement();
             st.executeUpdate("DELETE FROM `drones` WHERE `drones`.`id` = "
-                    + dron.getId() + "");
+                    + id + "");
             return true;
         }
     }

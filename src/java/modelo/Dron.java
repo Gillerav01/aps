@@ -22,6 +22,11 @@ public class Dron {
         this.marcaDron = marcaDron;
     }
 
+    public Dron(String modeloDron, String marcaDron) {
+        this.modeloDron = modeloDron;
+        this.marcaDron = marcaDron;
+    }
+
     public int getId() {
         return id;
     }

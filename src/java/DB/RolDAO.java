@@ -131,6 +131,22 @@ public class RolDAO {
         return roles;
     }
 
+    public static ArrayList<Agricultor> verUsuarioSinRoles() throws SQLException {
+        ConectorBD bdActual = new ConectorBD("localhost", "agr_precision", "root", "");
+        Connection conn;
+        conn = bdActual.getConexion();
+        ArrayList <Agricultor> agricultoresSinRol = new ArrayList();
+        AgricultorDAO adao = new AgricultorDAO();
+        adao.setConn(conn);
+        ArrayList <Agricultor> usuarios = adao.recuperarUsuarios();
+        System.out.println(usuarios.toString());
+        adao.cerrarConexion();
+        for(Agricultor a : usuarios){
+            
+        }
+        return agricultoresSinRol;
+    }
+
     /**
      * *
      * Te permite ver los roles que un usuario NO tiene

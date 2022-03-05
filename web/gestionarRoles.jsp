@@ -4,12 +4,18 @@
     Author     : DAW209
 --%>
 
+<%@page import="DB.AgricultorDAO"%>
+<%@page import="DB.RolDAO"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="DB.ConectorBD"%>
+<%@page import="modelo.Dron"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Rol"%>
 <%@page import="modelo.Agricultor"%>
 <%
     Agricultor actual = (Agricultor) session.getAttribute("agricultorLogueado");
     ArrayList<Rol> rolesActuales = (ArrayList<Rol>) session.getAttribute("rolesLogueado");
+    ArrayList<Agricultor> usuariosSinRol = RolDAO.verUsuarioSinRoles();
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,8 +35,7 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     </head>
-    <%
-        if (actual != null) {
+    <%        if (actual != null) {
             for (Rol roles : rolesActuales) {
                 if (roles.getNombreRol().equals("Administrador")) {
     %>
@@ -142,7 +147,66 @@
             </nav>
         </header>
         <main class="row d-flex">
+            <%
+                for (Rol rol : rolesActuales) {
+                    if (rol.getNombreRol().equals("Administrador")) {
 
+            %>
+            <section class="container col-12 col-xl-4 bg-dark">
+                <table class="table table-dark table-hover">
+                    <h1 class="text-center text-white">Usuarios sin roles</h1>
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">DNI</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><?= $usuariosTabla[$i][0] ?></th>
+                            <td><?= $usuariosTabla[$i][3] ?></td>
+                            <td><?= $usuariosTabla[$i][1] ?> <?= $usuariosTabla[$i][2] ?></td>
+                            <td><a href="gestionarRoles.php?idUsuario=<?= $usuariosTabla[$i][0] ?>&anadirRol=true" class="btn btn-danger">Añadir roles al usuario</a></td>
+                        <tr>
+                    </tbody>
+                </table>
+            </section>
+            <section class="container col-12 col-xl-8 bg-dark">
+                <h1 class="text-center text-white">Gestion de usuarios</h1>
+                <table class="table table-dark table-hover" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">DNI</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Roles</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?PHP
+                        for ($i = 0; $i < count($usuariosTabla); $i++) {
+                        ?>
+                        <tr>
+                            <th scope="row"><?= $usuariosTabla[$i][0] ?></th>
+                            <td><?= $usuariosTabla[$i][3] ?></td>
+                            <td><?= $usuariosTabla[$i][1] ?> <?= $usuariosTabla[$i][2] ?></td>
+                            <td><a href="mailto:<?= $usuariosTabla[$i][4] ?>" class="label" style="color: #ffffff;"><?= $usuariosTabla[$i][4] ?></a></td>
+                            <td><a href="gestionarRoles.php?idUsuario=<?= $usuariosTabla[$i][0] ?>&gestionarUsuario=true" class="btn btn-primary">Gestionar roles</a></td>
+                        <tr>
+                            <?PHP
+                            }
+                            ?>
+                    </tbody>
+                </table>
+            </section>
+            <%                    }
+                }
+            %>
         </main>
         <footer class="text-center text-lg-start text-white" style="background-color: #28242c; width: 100%;">
             <hr class="mb-4" />

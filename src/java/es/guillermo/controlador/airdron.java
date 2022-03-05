@@ -155,7 +155,30 @@ public class airdron extends HttpServlet {
             System.out.println("Los datos modificados son: " + session.getAttribute("nuevoNombre") + session.getAttribute("nuevoApellido") + request.getParameter("nuevoDNI") + request.getParameter("nuevoCorreo"));
             rd = getServletContext().getRequestDispatcher("/menuPrincipal.jsp");
             rd.forward(request, response);
-        }
+        } else if (come.equals("crearDron")) {
+            conn = bdActual.getConexion();
+            DronDAO nuevoDron = new DronDAO();
+            nuevoDron.setConn(conn);
+            HttpSession session = request.getSession(true);
+            nuevoDron.crearDron(new Dron(request.getParameter("modeloDron"), request.getParameter("marcaDron")), (Agricultor) session.getAttribute("agricultorLogueado"));
+            ArrayList<Dron> actualizarDrones = nuevoDron.recuperarDrones((Agricultor) session.getAttribute("agricultorLogueado"));
+            session.setAttribute("dronesUsuario", actualizarDrones);
+            nuevoDron.cerrarConexion();
+            rd = getServletContext().getRequestDispatcher("/gestionarDrones.jsp");
+            rd.forward(request, response);
+        } else if (come.equals("borrarDron")) {
+            int idDron = Integer.valueOf(request.getParameter("idDr"));
+            conn = bdActual.getConexion();
+            DronDAO borrarDron = new DronDAO();
+            borrarDron.setConn(conn);
+            HttpSession session = request.getSession(true);
+            borrarDron.borrarDron(idDron);
+            ArrayList<Dron> actualizarDrones = borrarDron.recuperarDrones((Agricultor) session.getAttribute("agricultorLogueado"));
+            session.setAttribute("dronesUsuario", actualizarDrones);
+            borrarDron.cerrarConexion();
+            rd = getServletContext().getRequestDispatcher("/gestionarDrones.jsp");
+            rd.forward(request, response);
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
