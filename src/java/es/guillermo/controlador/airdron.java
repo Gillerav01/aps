@@ -151,7 +151,10 @@ public class airdron extends HttpServlet {
             AgricultorDAO nuevoUsuario = new AgricultorDAO();
             nuevoUsuario.setConn(conn);
             HttpSession session = request.getSession(true);
-            nuevoUsuario.modificarAgricultor((Agricultor) session.getAttribute("agricultorLogueado"), new Agricultor());
+            nuevoUsuario.modificarAgricultor((Agricultor) session.getAttribute("agricultorLogueado"), new Agricultor(request.getParameter("nuevoNombre"), request.getParameter("nuevoApellido"), request.getParameter("nuevoDNI"), request.getParameter("nuevoCorreo")));
+            System.out.println("Los datos modificados son: " + session.getAttribute("nuevoNombre") + session.getAttribute("nuevoApellido") + request.getParameter("nuevoDNI") + request.getParameter("nuevoCorreo"));
+            rd = getServletContext().getRequestDispatcher("/menuPrincipal.jsp");
+            rd.forward(request, response);
         }
     }
 

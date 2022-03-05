@@ -141,34 +141,26 @@
         <main class="row d-flex">
             <section class="col-12 col-xl-6 bg-light d-flex p-2 flex-column justify-content-center align-items-center rounded" style="margin-right: 7%;">
                 <h1 style="color: black;">Bienvenido, <%=actual.getNombre()%></h1>
-                <form action="airdron" style="width: 100%;" class="d-flex p-4 flex-column justify-content-center align-items-center" method="post">
+                <form action="airdron" style="width: 100%;" class="d-flex p-4 flex-column justify-content-center align-items-center">
                     <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
                         <label for="id">ID: </label>
                         <input type="text" value="<%=actual.getId()%>" disabled style="width: 50%;">
                     </section>
                     <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
                         <label for="nombre">Nombre: </label>
-                        <input type="text" placeholder="<%=actual.getNombre()%>" style="width: 50%;" name="nuevoNombre" id="nombre">
+                        <input type="text" value="<%=actual.getNombre()%>" style="width: 50%;" name="nuevoNombre" id="nombre">
                     </section>
                     <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
                         <label for="apellidos">Apellidos: </label>
-                        <input type="text" placeholder="<%=actual.getApellido()%>" style="width: 50%;" name="nuevoApellido" id="apellidos">
+                        <input type="text" value="<%=actual.getApellido()%>" style="width: 50%;" name="nuevoApellido" id="apellidos">
                     </section>
                     <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
                         <label for="dni">DNI: </label>
-                        <input type="text" placeholder="<%=actual.getDni()%>" style="width: 50%;" name="nuevoDNI" id="dni">
+                        <input type="text" value="<%=actual.getDni()%>" style="width: 50%;" name="nuevoDNI" id="dni">
                     </section>
                     <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
                         <label for="correo">Correo: </label>
-                        <input type="email" placeholder="<%=actual.getEmail()%>" style="width: 50%;" name="nuevoCorreo" id="correo">
-                    </section>
-                    <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
-                        <label for="contrasena">Nueva contraseña: </label>
-                        <input type="password" placeholder="Contraseña nueva" style="width: 50%;" name="nuevaContraseña" id="contrasena">
-                    </section>
-                    <section class="d-flex justify-content-between align-items-center" style="width: 100%;">
-                        <label for="confContrasena">Confirmar nueva contraseña: </label>
-                        <input type="password" placeholder="Confirmar contraseña nueva" style="width: 50%;" name="nuevoconfContraseña" id="confContrasena">
+                        <input type="email" value="<%=actual.getEmail()%>" style="width: 50%;" name="nuevoCorreo" id="correo">
                     </section>
                     <input type="hidden" value="cambiarDatos" name="come">
                     <input type="submit" class="btn btn-dark" style="width: 100%; margin-top: 4px" value="Cambiar datos" id="cambiarDatos" name="cambiarDatos">

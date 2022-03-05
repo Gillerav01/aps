@@ -98,15 +98,34 @@ public class AgricultorDAO {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
+            String nombre = agricultor.getNombre();
+            System.out.println("Nombre: " + nombre);
+            String apellido = agricultor.getApellido();;
+            String correo = agricultor.getEmail();
+            String dni = agricultor.getDni();
+            if (!nombre.equals(agricultorModificado.getNombre())){
+                nombre = agricultorModificado.getNombre();
+                System.out.println("Nombre modificado: " + nombre);
+            }
+            if(!apellido.equals(agricultorModificado.getApellido())){
+                apellido = agricultorModificado.getApellido();
+                System.out.println("Apellido modificado " + apellido);
+            }
+            if(!dni.equals(agricultorModificado.getDni())){
+                dni = agricultorModificado.getDni();
+                System.out.println("DNI modificado: " + dni);
+            }
+            if(!correo.equals(agricultorModificado.getEmail())){
+                correo = agricultorModificado.getEmail();
+                System.out.println("Email modificado " + correo);
+            }
             Statement st = this.conn.createStatement();
             st.executeUpdate("UPDATE `agricultores` SET `nombre` = '"
-                    + agricultorModificado.getNombre()
+                    + nombre
                     + "', `apellido` = '"
-                    + agricultorModificado.getApellido()
-                    + "', `dni` = '" + agricultorModificado.getDni()
-                    + "', `password` = '"
-                    + agricultorModificado.getPassword()
-                    + "', `email` = '" + agricultorModificado.getEmail()
+                    + apellido
+                    + "', `dni` = '" + dni
+                    + "', `email` = '" + correo
                     + "' WHERE `agricultores`.`id` = "
                     + agricultor.getId()
                     + ";");
@@ -135,13 +154,14 @@ public class AgricultorDAO {
      * *
      * Recupera los datos de un agricultor y lo devuelve en forma de objeto
      *
+     * @param agricultor
      * @param id
      * @return
      * @throws SQLException
      */
-    public Agricultor recuperarDatos(int id) throws SQLException {
+    public Agricultor recuperarDatos(Agricultor agricultor) throws SQLException {
         Statement stmt = this.conn.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM agricultores WHERE id = " + id);
+            ResultSet result = stmt.executeQuery("SELECT * FROM agricultores WHERE id = " + agricultor.getId());
         Agricultor agricultorRecuperado = null;
         while (result.next()) {
             agricultorRecuperado = new Agricultor(result.getInt("id"), result.getString("nombre"), result.getString("apellido"), result.getString("dni"), result.getString("email"), result.getString("password"));

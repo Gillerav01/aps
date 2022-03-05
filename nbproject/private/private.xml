@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/gestionarParcelas.jsp</file>
-            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/src/java/es/guillermo/controlador/airdron.java</file>
-            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/registro.jsp</file>
-            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/gestionarDrones.jsp</file>
-            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/menuPrincipal.jsp</file>
-            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/js/main.js</file>
-            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/gestionarRoles.jsp</file>
-            <file>file:/C:/xampp/htdocs/ProyectoAgriculturaSERVLET/web/gestionarTrabajos.jsp</file>
-        </group>
         <group name="Apu ntes">
             <file>file:/D:/Users/DAW209/Documents/NetBeansProjects/JardineriaPrecisionSERVLET/web/js/main.js</file>
             <file>file:/D:/Users/DAW209/Documents/NetBeansProjects/JardineriaPrecisionSERVLET/src/java/DB/RolAgricultorDAO.java</file>
@@ -21,6 +11,13 @@
             <file>file:/D:/Users/DAW209/Documents/NetBeansProjects/JardineriaPrecisionSERVLET/src/java/es/guillermo/controlador/airdron.java</file>
             <file>file:/D:/Users/DAW209/Documents/NetBeansProjects/JardineriaPrecisionSERVLET/web/gestionarRoles.jsp</file>
             <file>file:/D:/Users/DAW209/Documents/NetBeansProjects/JardineriaPrecisionSERVLET/src/java/DB/AgricultorDAO.java</file>
+        </group>
+        <group>
+            <file>file:/home/guillermo/Documentos/Trabajos/Servidor/aps/src/java/modelo/Agricultor.java</file>
+            <file>file:/home/guillermo/Documentos/Trabajos/Servidor/aps/src/java/DB/AgricultorDAO.java</file>
+            <file>file:/home/guillermo/Documentos/Trabajos/Servidor/aps/src/java/lib/utilidades.java</file>
+            <file>file:/home/guillermo/Documentos/Trabajos/Servidor/aps/web/menuPrincipal.jsp</file>
+            <file>file:/home/guillermo/Documentos/Trabajos/Servidor/aps/src/java/es/guillermo/controlador/airdron.java</file>
         </group>
     </open-files>
 </project-private>

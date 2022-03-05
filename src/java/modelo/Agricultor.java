@@ -35,6 +35,13 @@ public class Agricultor {
         this.password = password;
         this.email = email;
     }
+
+    public Agricultor(String nombre, String apellido, String dni, String email) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.email = email;
+    }
     
     public int getId() {
         return id;
