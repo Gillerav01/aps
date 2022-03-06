@@ -41,18 +41,18 @@ public class RolAgricultorDAO {
      * *
      * Le otogar un rol al agricultor seleccionado
      *
+     * @param idRol
      * @param rol
-     * @param agricultor
      * @return
      * @throws SQLException
      */
-    public boolean otogarRol(Rol rol, Agricultor agricultor) throws SQLException {
+    public boolean otogarRol(int idRol, int idAgricultor) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("INSERT INTO `rolesagricultores` (`idAgricultor`, `idRol`) VALUES ('" + agricultor.getId() + "', '" + rol.getIdRol() + "');");
+            st.executeUpdate("INSERT INTO `rolesagricultores` (`idAgricultor`, `idRol`) VALUES ('" + idAgricultor + "', '" + idRol + "');");
             return true;
         }
     }
@@ -66,13 +66,13 @@ public class RolAgricultorDAO {
      * @return
      * @throws SQLException
      */
-    public boolean quitarRol(Rol rol, Agricultor agricultor) throws SQLException {
+    public boolean quitarRol(int idRol, int idAgricultor) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("DELETE FROM `rolesagricultores` WHERE `rolesagricultores`.`idAgricultor` = " + agricultor.getId() + " AND `rolesagricultores`.`idRol` = " + rol.getIdRol() + "");
+            st.executeUpdate("DELETE FROM `rolesagricultores` WHERE `rolesagricultores`.`idAgricultor` = " + idAgricultor + " AND `rolesagricultores`.`idRol` = " + idRol + "");
             return true;
         }
     }

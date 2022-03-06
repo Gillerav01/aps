@@ -152,18 +152,30 @@
                 for (Rol rol : rolesActuales) {
                     if (rol.getNombreRol().equals("Administrador")) {
                         if (request.getParameter("idUsuario") != null) {
-                            
-
+                            Agricultor agricultorSeleccionado = AgricultorDAO.informacionUsuario(Integer.valueOf(request.getParameter("idUsuario")));
+                            ConectorBD bdActual = new ConectorBD("localhost", "agr_precision", "root", "");
+                            Connection conn;
+                            conn = bdActual.getConexion();
+                            RolDAO rdao = new RolDAO();
+                            rdao.setConn(conn);
+                            ArrayList<Rol> rolesNoPoseidosSeleccionado = rdao.verRolesNoPoseidos(agricultorSeleccionado);
+                            ArrayList<Rol> rolesPoseidosSeleccionado = rdao.verRolesPoseidos(agricultorSeleccionado);
             %>
             <section class="container col-12 col-xl-12 bg-dark">
                 <section class="container col-12 col-xl-10 d-flex justify-content-evenly">
                     <section class="col-12 col-xl-5 bg-white d-flex flex-column justify-content-center align-items-center rounded">
                         <h3 class="text-center" style="color:black;">Añadir rol</h3>
                         <form action="airdron" class="">
-                            <select name="añadirRolSelect">
-
+                            <select name="rolSeleccionado">
+                                <%
+                                    for (Rol rolesSeleccionado : rolesNoPoseidosSeleccionado) {
+                                %>
+                                <option value="<%=rolesSeleccionado.getIdRol()%>"><%=rolesSeleccionado.getNombreRol()%></option>
+                                <%
+                                    }
+                                %>
                             </select>
-                            <input type="hidden" name="id" value="<%=request.getParameter("idUsuario")%>">
+                            <input type="hidden" name="idUsuario" value="<%=request.getParameter("idUsuario")%>">
                             <input type="hidden" name="come" value="anadirRol">
                             <input type="submit" name="añadirRol" value="Añadir">
                         </form>
@@ -171,9 +183,16 @@
                     <section class="col-12 col-xl-5 bg-light  d-flex flex-column justify-content-center align-items-center rounded">
                         <h3 class="text-center" style="color:black;">Eliminar rol</h3>
                         <form action="airdron" class="">
-                            <select name="borrarRolSelect">
+                            <select name="rolBorrado">
+                                <%
+                                    for (Rol rolesSeleccionado : rolesPoseidosSeleccionado) {
+                                %>
+                                <option value="<%=rolesSeleccionado.getIdRol()%>"><%=rolesSeleccionado.getNombreRol()%></option>
+                                <%
+                                    }
+                                %>
                             </select>
-                            <input type="hidden" name="id" value="<%=request.getParameter("idUsuario")%>">
+                            <input type="hidden" name="idUsuario" value="<%=request.getParameter("idUsuario")%>">
                             <input type="hidden" name="come" value="borrarRol">
                             <input type="submit" name="borrarRol" value="Borrar">
                         </form>

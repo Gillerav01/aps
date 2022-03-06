@@ -212,7 +212,6 @@ public class AgricultorDAO {
         ConectorBD bdActual = new ConectorBD("localhost", "agr_precision", "root", "");
         Connection conn;
         conn = bdActual.getConexion();
-        Agricultor ret = null;
         Statement stmt = conn.createStatement();
         ResultSet result = stmt.executeQuery("SELECT * FROM agricultores WHERE id = " + id);
         while(result.next()){

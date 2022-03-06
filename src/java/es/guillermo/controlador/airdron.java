@@ -178,7 +178,27 @@ public class airdron extends HttpServlet {
             borrarDron.cerrarConexion();
             rd = getServletContext().getRequestDispatcher("/gestionarDrones.jsp");
             rd.forward(request, response);
-        } 
+        } else if (come.equals("anadirRol")) {
+            int idRol = Integer.valueOf(request.getParameter("rolSeleccionado"));
+            int idUsuario = Integer.valueOf(request.getParameter("idUsuario"));
+            conn = bdActual.getConexion();
+            RolAgricultorDAO darRol = new RolAgricultorDAO();
+            darRol.setConn(conn);
+            darRol.otogarRol(idRol, idUsuario);
+            darRol.cerrarConexion();
+            rd = getServletContext().getRequestDispatcher("/gestionarRoles.jsp");
+            rd.forward(request, response);
+        } else if (come.equals("borrarRol")) {
+            int idRol = Integer.valueOf(request.getParameter("rolBorrado"));
+            int idUsuario = Integer.valueOf(request.getParameter("idUsuario"));
+            conn = bdActual.getConexion();
+            RolAgricultorDAO darRol = new RolAgricultorDAO();
+            darRol.setConn(conn);
+            darRol.quitarRol(idRol, idUsuario);
+            darRol.cerrarConexion();
+            rd = getServletContext().getRequestDispatcher("/gestionarRoles.jsp");
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

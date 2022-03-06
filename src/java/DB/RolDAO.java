@@ -191,14 +191,19 @@ public class RolDAO {
         ArrayList<Rol> verRolesNoPoseidos = new ArrayList();
         ArrayList<Rol> rolesUsuario = verRolesUsuario(agricultor);
         Statement stmt = this.conn.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT nombreRol FROM roles");
+        ResultSet result = stmt.executeQuery("SELECT DISTINCT * FROM roles");
         while (result.next()) {
             roles.add(new Rol(result.getInt("idRol"), result.getString("nombreRol")));
         }
-        for (Rol rol : roles) {
-            for (Rol rolesU : rolesUsuario) {
-                if (rol.getIdRol() != rolesU.getIdRol()) {
-                    verRolesNoPoseidos.add(rol);
+        for (Rol rolAnadir : roles){
+            if(rolesUsuario.isEmpty()){
+                verRolesNoPoseidos.add(rolAnadir);
+            } else {
+                for(Rol rolesU : rolesUsuario){
+                    if (rolesU.getIdRol() != rolAnadir.getIdRol()){
+                        verRolesNoPoseidos.add(rolAnadir);
+                        break;
+                    }
                 }
             }
         }
@@ -218,7 +223,7 @@ public class RolDAO {
         ArrayList<Rol> verRolesPoseidos = new ArrayList();
         ArrayList<Rol> rolesUsuario = verRolesUsuario(agricultor);
         Statement stmt = this.conn.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT nombreRol FROM roles");
+        ResultSet result = stmt.executeQuery("SELECT DISTINCT * FROM roles");
         while (result.next()) {
             roles.add(new Rol(result.getInt("idRol"), result.getString("nombreRol")));
         }
