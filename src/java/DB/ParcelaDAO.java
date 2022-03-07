@@ -102,9 +102,22 @@ public class ParcelaDAO {
         ResultSet result = stmt.executeQuery("SELECT * FROM parcelas WHERE idAgricultor = " + agricultor.getId());
         ArrayList<Parcela> parcelas = new ArrayList();
         while (result.next()) {
-            parcelas.add(new Parcela(result.getInt("idParcela"), result.getString("nomParcela"), result.getInt("area"),result.getInt("idAgricultor"), result.getString("direccionArchivo"), result.getInt("provincia"), result.getInt("municipio"), result.getString("puntos")));
+            parcelas.add(new Parcela(result.getInt("idParcela"), result.getString("nomParcela"), result.getInt("area"), result.getInt("idAgricultor"), result.getString("direccionArchivo"), result.getInt("provincia"), result.getInt("municipio"), result.getString("puntos")));
         }
         return parcelas;
+    }
+
+    public static String recuperarParcela(int idParcela) throws SQLException {
+        ConectorBD bdActual = new ConectorBD("localhost", "agr_precision", "root", "");
+        Connection conn;
+        conn = bdActual.getConexion();
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT nomParcela FROM parcelas WHERE idParcela = " + idParcela);
+        while (result.next()) {
+            return result.getString("nomParcela");
+        }
+        conn.close();
+        return null;
     }
 
     public Connection cerrarConexion() {

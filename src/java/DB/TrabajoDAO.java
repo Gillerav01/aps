@@ -50,13 +50,13 @@ public class TrabajoDAO {
      * @return
      * @throws SQLException
      */
-    public boolean crearTrabajo(Parcela parcela, Agricultor agricultor, Agricultor piloto, Trabajo trabajo) throws SQLException {
+    public boolean crearTrabajo(int idParcela, int idPiloto, int idAgricultor, String tipoTrabajo) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("INSERT INTO `trabajos` (`idTrabajo`, `idParcela`, `idPiloto`, `idAgricultor`, `idDron`, `tipoTarea`, `fechaRegistro`, `fechaRealizacion`) VALUES (NULL, '" + parcela.getId() + "', '" + piloto.getId() + "', '" + agricultor.getId() + "', NULL, '" + trabajo.getTipoTrabajo() + "', 'CURRENT_TIMESTAMP()', NULL);");
+            st.executeUpdate("INSERT INTO `trabajos` (`idTrabajo`, `idParcela`, `idPiloto`, `idAgricultor`, `idDron`, `tipoTarea`, `fechaRegistro`, `fechaRealizacion`) VALUES (NULL, '" + idParcela + "', '" + idAgricultor + "', '" + idPiloto + "', NULL, '" + tipoTrabajo + "', DEFAULT, NULL);");
             return true;
         }
     }
@@ -69,13 +69,13 @@ public class TrabajoDAO {
      * @return
      * @throws SQLException
      */
-    public boolean borrarTrabajo(Trabajo trabajo) throws SQLException {
+    public boolean borrarTrabajo(int id) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("DELETE FROM `trabajos` WHERE idTrabajo = " + trabajo.getIdTrabajo() + "");
+            st.executeUpdate("DELETE FROM `trabajos` WHERE idTrabajo = " + id + "");
             return true;
         }
     }
@@ -141,10 +141,10 @@ public class TrabajoDAO {
      * @return
      * @throws SQLException
      */
-    public ArrayList<Trabajo> verTrabajosPilotoPendientes(Agricultor agricultor) throws SQLException {
+    public ArrayList<Trabajo> verTrabajosPilotoPendientes(int id) throws SQLException {
         ArrayList<Trabajo> trabajos = new ArrayList();
         Statement stmt = this.conn.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM trabajos WHERE idPiloto = " + agricultor.getId() + " AND fechaRealizacion IS null");
+        ResultSet result = stmt.executeQuery("SELECT * FROM trabajos WHERE idPiloto = " + id + " AND fechaRealizacion IS null");
         while (result.next()) {
             trabajos.add(new Trabajo(result.getInt("idTrabajo"), result.getInt("idParcela"), result.getInt("idPiloto"), result.getInt("idAgricultor"), result.getInt("idDron"), result.getString("tipoTarea"), result.getDate("fechaRegistro"), result.getDate("fechaRealizacion")));
         }
@@ -178,13 +178,13 @@ public class TrabajoDAO {
      * @return
      * @throws SQLException
      */
-    public boolean realizarTrabajo(Trabajo trabajo, Dron dron) throws SQLException {
+    public boolean realizarTrabajo(int idTrabajo, int idDron) throws SQLException {
         if (this.conn == null) {
             System.out.println("No existe una conexión con la base de datos.");
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("UPDATE `trabajos` SET `idDron` = '" + dron.getId() + "', `fechaRealizacion` = current_timestamp() WHERE `trabajos`.`idTrabajo` = " + trabajo.getIdTrabajo());
+            st.executeUpdate("UPDATE `trabajos` SET `idDron` = '" + idDron + "', `fechaRealizacion` = " + "current_timestamp()" + " WHERE `trabajos`.`idTrabajo` = " + idTrabajo + ";");
             return true;
         }
     }

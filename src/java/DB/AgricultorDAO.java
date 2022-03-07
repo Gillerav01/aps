@@ -178,7 +178,7 @@ public class AgricultorDAO {
      */
     public ArrayList<Agricultor> recuperarPilotos() throws SQLException {
         Statement stmt = this.conn.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT agricultores.id, agricultores.nombre, agricultores.apellido FROM agricultores, rolesagricultores WHERE rolesagricultores.idRol = 3 AND rolesagricultores.idAgricultor = agricultores.id");
+        ResultSet result = stmt.executeQuery("SELECT * FROM agricultores, rolesagricultores WHERE rolesagricultores.idRol = 3 AND rolesagricultores.idAgricultor = agricultores.id");
         ArrayList<Agricultor> pilotos = new ArrayList();
         while (result.next()) {
             pilotos.add(new Agricultor(result.getInt("id"), result.getString("nombre"), result.getString("apellido"), result.getString("dni"), result.getString("email"), result.getString("password")));

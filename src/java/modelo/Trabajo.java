@@ -118,5 +118,12 @@ public class Trabajo {
     public void setTipoTrabajo(String tipoTrabajo) {
         this.tipoTrabajo = tipoTrabajo;
     }
+
+    @Override
+    public String toString() {
+        return "Trabajo{" + "idTrabajo=" + idTrabajo + ", idParcela=" + idParcela + ", idPiloto=" + idPiloto + ", idAgricultor=" + idAgricultor + ", idDron=" + idDron + ", tipoTrabajo=" + tipoTrabajo + ", fechaRegistro=" + fechaRegistro + ", fechaRealizacion=" + fechaRealizacion + '}';
+    }
+    
+    
     
 }

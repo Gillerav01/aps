@@ -4,12 +4,15 @@
     Author     : DAW209
 --%>
 
+<%@page import="modelo.Parcela"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Rol"%>
 <%@page import="modelo.Agricultor"%>
 <%
     Agricultor actual = (Agricultor) session.getAttribute("agricultorLogueado");
     ArrayList<Rol> rolesActuales = (ArrayList<Rol>) session.getAttribute("rolesLogueado");
+    ArrayList<Parcela> parcelasUsuario = (ArrayList<Parcela>) session.getAttribute("parcelasUsuario");
+
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,8 +32,7 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     </head>
-    <%
-        if (actual != null) {
+    <%        if (actual != null) {
             for (Rol roles : rolesActuales) {
                 if (roles.getNombreRol().equals("Agricultor")) {
     %>
@@ -142,39 +144,86 @@
             </nav>
         </header>
         <main class="row d-flex">
-
-        </main>
-        <footer class="text-center text-lg-start text-white" style="background-color: #28242c; width: 100%;">
-            <hr class="mb-4" />
-            <section class="mb-4 text-center">
-                <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/guillermo.illera/" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                    </svg></a>
-                <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/itsguillermo97/" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg></a>
-                <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/gillerav/" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect x="2" y="9" width="4" height="12"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                    </svg></a>
-                <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Gillerav01" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                    </svg></a>
+            <%
+                for (Rol rol : rolesActuales) {
+                    if (rol.getNombreRol().equals("Piloto")) {
+            %>
+            <section class="col-12 col-xl-12 bg-light d-flex p-1 flex-column justify-content-center align-items-center rounded mt-2 p-2 text-center">
+                <div id="map-container">
+                    <div id="map"></div>
+                </div>
+                <h2>Ver parcelas</h2>
+                <table class="table table-white table-hover" style="width: 100%; text-align: center;">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre parcela</th>
+                            <th scope="col">Area</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            for (Parcela parcelas : parcelasUsuario) {
+                        %>
+                        <tr>
+                            <td><%=parcelas.getId()%></td>
+                            <td><%=parcelas.getNomParcela()%></td>
+                            <td><%=parcelas.getArea()%></td>
+                            <td><button class="btn btn-primary" value="<%=parcelas.getId()%>" onclick="dibujarParcela(this.value)">Ver en el mapa</button></td>
+                            <td><a href="airdron?come=borrarParcela&parcelaBorrar=<%=parcelas.getId()%>" class="btn btn-danger">Borrar parcela</a></td>
+                        <tr>
+                            <%
+                                }
+                            %>
+                    </tbody>
+                </table>
             </section>
-        </div>
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-            © 2021 - 2022 Copyright:
-            <a class="text-white" href="https://www.instagram.com/itsguillermo97/">Guillermo Illera</a>
-        </div>
-    </footer>
-</body>
-<%
-                break;
-            }
-        }
-    }
-%>
-</html>
+            <section class="col-12 col-xl-12 bg-light d-flex p-1 flex-column justify-content-center rounded mt-2 mb-2 p-2 text-center">
+                <h2>Registrar parcelas</h2>
+                <form enctype="multipart/form-data" action="airdron" method="POST" class="d-flex flex-column align-items-center justify-content-center gap-5">
+                    <label for="archivoGML">Añade tu archivo .gml: </label><input type="file" name="archivoGML" id="archivoGML" accept=".gml">
+                    <label for="nombreParcela">Nombre <input type="text" name="nombreParcela" id="nombreParcela">
+                    <input type="submit" name="registrarParcela" value="Registrar parcela" class="btn btn-primary">
+                    <input type="hidden" name="come" value="crearParcela">
+                </form>
+                        </section>
+                        <%                    }
+                            }
+                        %>
+                        </main>
+                        <footer class="text-center text-lg-start text-white" style="background-color: #28242c; width: 100%;">
+                            <hr class="mb-4" />
+                            <section class="mb-4 text-center">
+                                <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/guillermo.illera/" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                    </svg></a>
+                                <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/itsguillermo97/" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg></a>
+                                <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/gillerav/" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                    </svg></a>
+                                <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Gillerav01" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                    </svg></a>
+                            </section>
+                            </div>
+                            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+                                © 2021 - 2022 Copyright:
+                                <a class="text-white" href="https://www.instagram.com/itsguillermo97/">Guillermo Illera</a>
+                            </div>
+                        </footer>
+                        </body>
+                        <%
+                                        break;
+                                    }
+                                }
+                            }
+                        %>
+                        </html>

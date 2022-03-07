@@ -198,6 +198,41 @@ public class airdron extends HttpServlet {
             darRol.cerrarConexion();
             rd = getServletContext().getRequestDispatcher("/gestionarRoles.jsp");
             rd.forward(request, response);
+        } else if (come.equals("realizarTrabajo")) {
+            int idTrabajo = Integer.valueOf(request.getParameter("elegirTrabajo"));
+            int idDron = Integer.valueOf(request.getParameter("elegirDron"));
+            TrabajoDAO tdao = new TrabajoDAO();
+            conn = bdActual.getConexion();
+            tdao.setConn(conn);
+            tdao.realizarTrabajo(idDron, idTrabajo);
+            tdao.cerrarConexion();
+            rd = getServletContext().getRequestDispatcher("/gestionarTrabajos.jsp");
+            rd.forward(request, response);
+        } else if (come.equals("registroTrabajo")) {
+            int idParcela = Integer.valueOf(request.getParameter("parcela"));
+            int pilotoSeleccionado = Integer.valueOf(request.getParameter("parcela"));
+            String tipoTrabajo = request.getParameter("tipo");
+            HttpSession session = request.getSession(true);
+            TrabajoDAO tdao = new TrabajoDAO();
+            Agricultor agricultorActual = (Agricultor) session.getAttribute("agricultorLogueado");
+            System.out.println("Agricultor actual en come registro trabajo " + agricultorActual + "----------------------------------------------");
+            conn = bdActual.getConexion();
+            tdao.setConn(conn);
+            tdao.crearTrabajo(idParcela, pilotoSeleccionado, agricultorActual.getId(), tipoTrabajo);
+            tdao.cerrarConexion();
+            rd = getServletContext().getRequestDispatcher("/gestionarTrabajos.jsp");
+            rd.forward(request, response);
+        } else if (come.equals("borrarTarea")) {
+            int idTarea = Integer.valueOf(request.getParameter("idTarea"));
+            TrabajoDAO tdao = new TrabajoDAO();
+            conn = bdActual.getConexion();
+            tdao.setConn(conn);
+            tdao.borrarTrabajo(idTarea);
+            tdao.cerrarConexion();
+            rd = getServletContext().getRequestDispatcher("/gestionarTrabajos.jsp");
+            rd.forward(request, response);
+        } else if (come.equals("crearParcela")){
+            
         }
     }
 

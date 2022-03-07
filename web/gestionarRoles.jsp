@@ -207,9 +207,9 @@
                     <h1 class="text-center text-white">Usuarios sin roles</h1>
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">DNI</th>
-                            <th scope="col">Nombre</th>
+                            <th scope="col">Nombre parcela</th>
+                            <th scope="col">Tipo tarea</th>
+                            <th scope="col">Fecha de registro</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
