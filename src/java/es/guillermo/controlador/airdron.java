@@ -204,13 +204,13 @@ public class airdron extends HttpServlet {
             TrabajoDAO tdao = new TrabajoDAO();
             conn = bdActual.getConexion();
             tdao.setConn(conn);
-            tdao.realizarTrabajo(idDron, idTrabajo);
+            tdao.realizarTrabajo(idTrabajo, idDron);
             tdao.cerrarConexion();
             rd = getServletContext().getRequestDispatcher("/gestionarTrabajos.jsp");
             rd.forward(request, response);
         } else if (come.equals("registroTrabajo")) {
             int idParcela = Integer.valueOf(request.getParameter("parcela"));
-            int pilotoSeleccionado = Integer.valueOf(request.getParameter("parcela"));
+            int pilotoSeleccionado = Integer.valueOf(request.getParameter("piloto"));
             String tipoTrabajo = request.getParameter("tipo");
             HttpSession session = request.getSession(true);
             TrabajoDAO tdao = new TrabajoDAO();

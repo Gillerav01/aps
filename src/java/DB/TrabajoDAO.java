@@ -1,6 +1,7 @@
 package DB;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,7 +57,7 @@ public class TrabajoDAO {
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("INSERT INTO `trabajos` (`idTrabajo`, `idParcela`, `idPiloto`, `idAgricultor`, `idDron`, `tipoTarea`, `fechaRegistro`, `fechaRealizacion`) VALUES (NULL, '" + idParcela + "', '" + idAgricultor + "', '" + idPiloto + "', NULL, '" + tipoTrabajo + "', DEFAULT, NULL);");
+            st.executeUpdate("INSERT INTO `trabajos` (`idTrabajo`, `idParcela`, `idPiloto`, `idAgricultor`, `idDron`, `tipoTarea`, `fechaRegistro`, `fechaRealizacion`) VALUES (NULL, '" + idParcela + "', '" + idPiloto + "', '" + idAgricultor + "', NULL, '" + tipoTrabajo + "', DEFAULT, NULL);");
             return true;
         }
     }
@@ -173,8 +174,8 @@ public class TrabajoDAO {
      * *
      * Te permite realizar un trabajo
      *
-     * @param trabajo
-     * @param dron
+     * @param idTrabajo
+     * @param idDron
      * @return
      * @throws SQLException
      */
@@ -184,7 +185,7 @@ public class TrabajoDAO {
             return false;
         } else {
             Statement st = this.conn.createStatement();
-            st.executeUpdate("UPDATE `trabajos` SET `idDron` = '" + idDron + "', `fechaRealizacion` = " + "current_timestamp()" + " WHERE `trabajos`.`idTrabajo` = " + idTrabajo + ";");
+            st.executeUpdate("UPDATE `trabajos` SET `idDron` = '" + idDron + "', `fechaRealizacion` = CURRENT_TIMESTAMP() WHERE `trabajos`.`idTrabajo` = " + idTrabajo + ";");
             return true;
         }
     }
